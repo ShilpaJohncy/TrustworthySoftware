@@ -8,5 +8,14 @@
     <artifactId>CodeBase</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>us.springett</groupId>
+            <artifactId>cvss-calculator</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
+
+    </dependencies>
     
 </project>
