@@ -23,9 +23,10 @@ public class CVSSTest {
 
         Score score = cvssV3.calculateScore();
 
-        executeApp(Constants.ZOOM_EXE);
-        executeApp(Constants.TEAMS_EXE);
-        executeApp(Constants.DISCORD_EXE);
+//        executeApp(Constants.ZOOM_EXE);
+        executeApp(Constants.NOTEPAD_EXE);
+//        executeApp(Constants.TEAMS_EXE);
+//        executeApp(Constants.DISCORD_EXE);
     }
 
 
