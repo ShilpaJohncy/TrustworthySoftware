@@ -16,10 +16,19 @@
     </properties>
 
     <dependencies>
+
+<!--        CVSS calculator with Java -->
         <dependency>
             <groupId>us.springett</groupId>
             <artifactId>cvss-calculator</artifactId>
             <version>1.4.0</version>
+        </dependency>
+
+<!--        JSOUP for web scraping -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
         </dependency>
 
     </dependencies>

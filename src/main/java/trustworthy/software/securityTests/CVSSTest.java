@@ -1,34 +1,41 @@
 package trustworthy.software.securityTests;
 
-import trustworthy.software.utils.*;
-import us.springett.cvss.CvssV3;
-import us.springett.cvss.CvssV3.*;
-import us.springett.cvss.Score;
 
-import static trustworthy.software.utils.ExecuteApp.executeApp;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.FormElement;
+
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import static trustworthy.software.utils.Constants.*;
 
 
 public class CVSSTest {
+    public static void extractCVSSScore(String url){
+        try{
+            Connection.Response searchBoxResponse = Jsoup.connect(url)
+                    .method(Connection.Method.GET)
+                    .userAgent(USER_AGENT)
+                    .execute();
 
-    public static void getScore() {
-        CvssV3 cvssV3 = new CvssV3()
-                .attackVector(AttackVector.NETWORK)
-                .attackComplexity(AttackComplexity.LOW)
-                .privilegesRequired(PrivilegesRequired.HIGH)
-                .userInteraction(UserInteraction.NONE)
-                .scope(Scope.UNCHANGED)
-                .confidentiality(CIA.HIGH)
-                .integrity(CIA.HIGH)
-                .availability(CIA.HIGH);
+            FormElement searchBox = (FormElement)searchBoxResponse.parse()
+                    .select("div > form#cpeSearchForm").first();
 
-        Score score = cvssV3.calculateScore();
+            Element searchField = searchBox.select("#SearchTextBox").first();
+            searchField.val("Zoom");
 
-//        executeApp(Constants.ZOOM_EXE);
-        executeApp(Constants.NOTEPAD_EXE);
-//        executeApp(Constants.TEAMS_EXE);
-//        executeApp(Constants.DISCORD_EXE);
+            Connection.Response loginActionResponse = searchBox.submit()
+                    .cookies(searchBoxResponse.cookies())
+                    .userAgent(USER_AGENT)
+                    .execute();
+
+            System.out.println(loginActionResponse.body());
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
-
-
 
 }

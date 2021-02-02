@@ -1,10 +1,10 @@
 package trustworthy.software;
 
 
-import static trustworthy.software.securityTests.CVSSTest.getScore;
+import static trustworthy.software.securityTests.CVSSTest.*;
 
 public class TrustworthySoftware {
     public static void main(String[] args) {
-        getScore();
+        extractCVSSScore("https://nvd.nist.gov/products/cpe/search?");
     }
 }

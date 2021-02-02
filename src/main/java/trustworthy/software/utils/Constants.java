@@ -8,5 +8,8 @@ public final class Constants {
     public static final String NOTEPAD_EXE = "src/main/resources/notepad2/Notepad2.exe";
     public static final String DISCORD_EXE = "C:\\Users\\shilp\\AppData\\Local\\Discord\\app-0.0.309\\Discord.exe";
 
+    //The user agent for Web scraping
+    public static final String USER_AGENT = "Chrome/51.0.2704.103";
+
 
 }
