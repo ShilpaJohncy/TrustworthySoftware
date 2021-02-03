@@ -10,6 +10,9 @@ public final class Constants {
 
     //The user agent for Web scraping
     public static final String USER_AGENT = "Chrome/51.0.2704.103";
+    public static final String NVD_BASE_URL = "https://nvd.nist.gov";
+    public static final String NVD_SEARCH_POSTFIX = "/products/cpe/search?";
+    public static final String CPE_PREFIX = "cpe:2.3:a:";
 
 
 }
