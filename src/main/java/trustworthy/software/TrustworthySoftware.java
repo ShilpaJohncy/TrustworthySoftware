@@ -1,12 +1,12 @@
 package trustworthy.software;
 
 
-import static trustworthy.software.securityTests.CVSSTest.*;
+import static trustworthy.software.security.CVSSTest.*;
 
 public class TrustworthySoftware {
     public static void main(String[] args) {
-        extractCVSSScore("Zoom", "zoom", "4.6.10");
-        extractCVSSScore("Microsoft", "Teams", "");
-        extractCVSSScore("notepad-plus-plus", "Notepad\\+\\+", "");
+        extractCVSSScore("Zoom", "zoom", "");
+//        extractCVSSScore("Microsoft", "Teams", "");
+        extractCVSSScore("notepad-plus-plus", "Notepad\\+\\+", "7.6.6");
     }
 }
