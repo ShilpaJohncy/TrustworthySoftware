@@ -8,6 +8,9 @@ import org.jsoup.nodes.FormElement;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import static trustworthy.software.utils.Constants.*;
 
@@ -16,6 +19,13 @@ public class CVSSTest {
 
     public static void extractCVSSScore(String vendor, String product, String versionNo){
         try{
+
+            Element searchLinks;
+            List<Double> scores = new ArrayList<>();
+            String[] CVSSScoreArray;
+            double totalScore = 0.0;
+            DecimalFormat df = new DecimalFormat("#.#");
+
             // Connect to the NVD search webpage
             Connection.Response searchBoxResponse = Jsoup.connect(NVD_BASE_URL + NVD_SEARCH_POSTFIX)
                     .method(Connection.Method.GET)
@@ -37,7 +47,6 @@ public class CVSSTest {
                     .execute();
 
             // Extracting the links to the CVEs page from the search results
-            Element searchLinks = null;
 
             // If version number is not provided, get the CVSS score for the latest available product version
             if(versionNo.isEmpty()) {
@@ -59,7 +68,7 @@ public class CVSSTest {
                         .selectFirst("table[class$=table table-striped table-hover] > tbody > tr > td > div[class$=row] > div[class$=col-lg-12] > a[class$=btn btn-sm]");
             }
             String link = searchLinks.attr("href");
-            System.out.println(link);
+
             if(link != null) {
                 // Go to the CVE page extracted
                 Connection.Response CVEPage = Jsoup.connect(NVD_BASE_URL + link)
@@ -67,12 +76,21 @@ public class CVSSTest {
                         .userAgent(USER_AGENT)
                         .execute();
 
-                // Extract the CVSS score for the first entry from the table (first since its arranged by date)
-                Element CVSSSeverity = CVEPage.parse().selectFirst("#cvss3-link > a");
-                if(CVSSSeverity != null) {
-                    String score = CVSSSeverity.text();
-                    System.out.println(score);
+                // Extract the CVSS score for the first 20 entries (if 20 exists)
+                Elements vulnerabilityList = CVEPage.parse().select("table[class$=table table-striped table-hover] > tbody > tr");
+
+                if(vulnerabilityList != null){
+                    // Calculate the average of all the CVSS scores - unweighted
+                    for(Element vulnerability : vulnerabilityList) {
+                        CVSSScoreArray = ((vulnerability.select("#cvss3-link > a").text()).split(" "));
+                        scores.add(Double.parseDouble(CVSSScoreArray[0]));
+                    }
+                    for(int i = 0; i < scores.size(); i++){
+                        totalScore += scores.get(i);
+                    }
+                    totalScore /= scores.size();
                 }
+                System.out.println("Score = " + Double.valueOf(df.format(totalScore)));
             }
 
         }catch(IOException e){
