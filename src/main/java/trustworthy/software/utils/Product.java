@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Settergit
+@Setter
 public class Product {
 
     String productName;
