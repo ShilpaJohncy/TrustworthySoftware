@@ -1,4 +1,4 @@
-package trustworthy.software.security;
+package trustworthy.software.cvss;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -85,8 +85,8 @@ public class CVSSTest {
                         CVSSScoreArray = ((vulnerability.select("#cvss3-link > a").text()).split(" "));
                         scores.add(Double.parseDouble(CVSSScoreArray[0]));
                     }
-                    for(int i = 0; i < scores.size(); i++){
-                        totalScore += scores.get(i);
+                    for (Double score : scores) {
+                        totalScore += score;
                     }
                     totalScore /= scores.size();
                 }

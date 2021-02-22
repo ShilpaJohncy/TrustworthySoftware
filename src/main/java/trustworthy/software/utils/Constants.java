@@ -14,5 +14,7 @@ public final class Constants {
     public static final String NVD_SEARCH_POSTFIX = "/products/cpe/search?";
     public static final String CPE_PREFIX = "cpe:2.3:a:";
 
+    // The executables
+    public static final String WINCHECKSEC_EXE = "src/main/resources/winchecksec/winchecksec.exe";
 
 }

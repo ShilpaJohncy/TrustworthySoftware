@@ -17,18 +17,32 @@
 
     <dependencies>
 
-<!--        CVSS calculator with Java -->
-        <dependency>
-            <groupId>us.springett</groupId>
-            <artifactId>cvss-calculator</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-
-<!--        JSOUP for web scraping -->
+<!--    JSOUP for web scraping -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.13.1</version>
+        </dependency>
+
+<!--    Dependency for getters and setters -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.18</version>
+        </dependency>
+
+<!--    Google Gson dependency to convert Json object to Java Object-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+
+<!--    Json dependency to create JSON object -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>org.json</artifactId>
+            <version>chargebee-1.0</version>
         </dependency>
 
     </dependencies>
