@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static trustworthy.software.utils.Constants.NO_OF_TRIES;
-import static trustworthy.software.utils.Constants.TIMEOUT;
+import static trustworthy.software.utils.Constants.*;
 
-public class AvailabilityTests {
+public class AvailabilityTests{
 
     /**
      * Runs the test to check availability using a naive equation
@@ -18,22 +17,27 @@ public class AvailabilityTests {
      *
      * @param prodExePath - The product who's availability is to be tested
      */
-    public static void runAvailabilityTest(String prodExePath){
-        int successfulRuns = 0;
-        for(int runCount = 1; runCount <= NO_OF_TRIES; runCount++){
-            if(runExecutable(prodExePath)){
-                successfulRuns++;
-            }
+    public static void runAvailabilityTest(String prodExePath) throws InterruptedException {
+        RunnableImplementation runnable = new RunnableImplementation(prodExePath);
+
+        Thread[] threads = new Thread[NO_OF_TRIES];
+        for(int threadCount = 0; threadCount < NO_OF_TRIES; threadCount++){
+            Thread thread = new Thread(runnable);
+            thread.start();
+            threads[threadCount] = thread;
+        }
+        // Wait for all threads to be closed
+        for(Thread thread: threads){
+            thread.join();
         }
 
-        if (successfulRuns > ((NO_OF_TRIES/2) + 1))
+        if (runnable.getSuccessfulRuns() > ((NO_OF_TRIES/2) + 1))
             System.out.println("Available");
-        else if(successfulRuns == ((NO_OF_TRIES/2) + 1))
+        else if(runnable.getSuccessfulRuns() == ((NO_OF_TRIES/2) + 1))
             System.out.println("Inconclusive");
         else
             System.out.println("Not available");
     }
-
 
     /**
      * Function that executes the program once
@@ -47,9 +51,8 @@ public class AvailabilityTests {
         try {
             // Start the process
             process = builder.start();
-
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
-            if(process == null | process.waitFor(TIMEOUT, TimeUnit.MILLISECONDS)){
+            if(process == null | process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
                 return false;
             }
 
@@ -70,4 +73,5 @@ public class AvailabilityTests {
         }
         return true;
     }
+
 }
