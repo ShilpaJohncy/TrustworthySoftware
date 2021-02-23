@@ -17,4 +17,6 @@ public final class Constants {
     // The executables
     public static final String WINCHECKSEC_EXE = "src/main/resources/winchecksec/winchecksec.exe";
 
+    public static final int NO_OF_TRIES = 5;
+    public static final long TIMEOUT = 1000l;
 }
