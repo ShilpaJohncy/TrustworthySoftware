@@ -2,6 +2,7 @@ package trustworthy.software;
 
 
 import org.json.JSONException;
+import trustworthy.software.utils.Product;
 
 import java.io.IOException;
 
@@ -12,16 +13,27 @@ import static trustworthy.software.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class TrustworthySoftware {
     public static void main(String[] args) {
+        Product product = new Product();
+        product.setExecutablePath(TEAMS_EXE);
+        product.setParallelize(false);
+
+        Product product1 = new Product();
+        product1.setExecutablePath(NOTEPAD_EXE);
+        product1.setParallelize(true);
 //        extractCVSSScore("Zoom", "zoom", "");
 //        extractCVSSScore("Microsoft", "word", "");
 //        extractCVSSScore("notepad-plus-plus", "Notepad\\+\\+", "7.6.6");
 //        extractCVSSScore("adobe", "acrobat_reader_dc", "20.012.20048");
 //        extractCVSSScore("mcafee", "livesafe", "");
         try {
-            runAvailabilityTest(NOTEPAD_EXE);
-            getWinCheckSecScores(NOTEPAD_EXE);
-        } catch (IOException | JSONException | InterruptedException e) {
+            runAvailabilityTest(product);
+            runAvailabilityTest(product1);
+//            getWinCheckSecScores(NOTEPAD_EXE);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//        catch (IOException | JSONException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }

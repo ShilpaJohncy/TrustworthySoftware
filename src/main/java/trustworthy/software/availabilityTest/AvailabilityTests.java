@@ -1,12 +1,15 @@
 package trustworthy.software.availabilityTest;
 
+import trustworthy.software.utils.Product;
+
 import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static trustworthy.software.utils.Constants.*;
+import static trustworthy.software.utils.Constants.NAIVE_TIMEOUT;
+import static trustworthy.software.utils.Constants.NO_OF_TRIES;
 
-public class AvailabilityTests{
+public class AvailabilityTests {
 
     /**
      * Runs the test to check availability using a naive equation
@@ -15,25 +18,50 @@ public class AvailabilityTests{
      * If its = 50%, inconclusive
      * And if its < 50%, the result is inconclusive
      *
-     * @param prodExePath - The product who's availability is to be tested
+     * @param product - The product who's availability is to be tested
      */
-    public static void runAvailabilityTest(String prodExePath) throws InterruptedException {
-        RunnableImplementation runnable = new RunnableImplementation(prodExePath);
+    public static void runAvailabilityTest(Product product) throws InterruptedException{
+        if(!product.isParallelize()){
+            serialExecutionTest(product);
+        }else{
+            parallelExecutionTest(product);
+        }
 
+    }
+
+    public static void parallelExecutionTest(Product product) throws InterruptedException {
+        RunnableImplementation runnable = new RunnableImplementation(product.getExecutablePath());
         Thread[] threads = new Thread[NO_OF_TRIES];
         for(int threadCount = 0; threadCount < NO_OF_TRIES; threadCount++){
             Thread thread = new Thread(runnable);
             thread.start();
-            threads[threadCount] = thread;
+            threads[threadCount]=thread;
         }
-        // Wait for all threads to be closed
-        for(Thread thread: threads){
+        //Wait for all threads to be closed
+        for(Thread thread:threads){
             thread.join();
         }
 
-        if (runnable.getSuccessfulRuns() > ((NO_OF_TRIES/2) + 1))
+        if(runnable.getSuccessfulRuns() > ((NO_OF_TRIES/2)+1))
             System.out.println("Available");
-        else if(runnable.getSuccessfulRuns() == ((NO_OF_TRIES/2) + 1))
+        else if(runnable.getSuccessfulRuns()==((NO_OF_TRIES/2)+1))
+            System.out.println("Inconclusive");
+        else
+            System.out.println("Notavailable");
+
+    }
+
+    public static void serialExecutionTest(Product product){
+        int successfulRuns = 0;
+        for(int runCount = 1; runCount <= NO_OF_TRIES; runCount++){
+            if(runExecutable(product.getExecutablePath())){
+                successfulRuns++;
+            }
+        }
+
+        if (successfulRuns > ((NO_OF_TRIES/2) + 1))
+            System.out.println("Available");
+        else if(successfulRuns == ((NO_OF_TRIES/2) + 1))
             System.out.println("Inconclusive");
         else
             System.out.println("Not available");
@@ -51,6 +79,7 @@ public class AvailabilityTests{
         try {
             // Start the process
             process = builder.start();
+
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
             if(process == null | process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
                 return false;
@@ -73,5 +102,4 @@ public class AvailabilityTests{
         }
         return true;
     }
-
 }
