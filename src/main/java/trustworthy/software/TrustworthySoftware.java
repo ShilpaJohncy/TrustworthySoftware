@@ -20,6 +20,7 @@ public class TrustworthySoftware {
         Product product1 = new Product();
         product1.setExecutablePath(NOTEPAD_EXE);
         product1.setParallelize(true);
+
 //        extractCVSSScore("Zoom", "zoom", "");
 //        extractCVSSScore("Microsoft", "word", "");
 //        extractCVSSScore("notepad-plus-plus", "Notepad\\+\\+", "7.6.6");

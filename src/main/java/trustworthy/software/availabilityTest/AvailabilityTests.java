@@ -21,15 +21,28 @@ public class AvailabilityTests {
      * @param product - The product who's availability is to be tested
      */
     public static void runAvailabilityTest(Product product) throws InterruptedException{
+        int successfulRuns;
         if(!product.isParallelize()){
-            serialExecutionTest(product);
+            successfulRuns = serialExecutionTest(product);
         }else{
-            parallelExecutionTest(product);
+            successfulRuns = parallelExecutionTest(product);
         }
 
+        if (successfulRuns > ((NO_OF_TRIES/2) + 1))
+            System.out.println("Available");
+        else if(successfulRuns == ((NO_OF_TRIES/2) + 1))
+            System.out.println("Inconclusive");
+        else
+            System.out.println("Not available");
     }
 
-    public static void parallelExecutionTest(Product product) throws InterruptedException {
+    /**
+     * This function is called if the product is expected to run in parallel.
+     * @param product - The product who's availability is to be tested.
+     * @throws InterruptedException - When the thread is interrupted.
+     * @return the number of successful runs
+     */
+    private static int parallelExecutionTest(Product product) throws InterruptedException {
         RunnableImplementation runnable = new RunnableImplementation(product.getExecutablePath());
         Thread[] threads = new Thread[NO_OF_TRIES];
         for(int threadCount = 0; threadCount < NO_OF_TRIES; threadCount++){
@@ -41,30 +54,22 @@ public class AvailabilityTests {
         for(Thread thread:threads){
             thread.join();
         }
-
-        if(runnable.getSuccessfulRuns() > ((NO_OF_TRIES/2)+1))
-            System.out.println("Available");
-        else if(runnable.getSuccessfulRuns()==((NO_OF_TRIES/2)+1))
-            System.out.println("Inconclusive");
-        else
-            System.out.println("Notavailable");
-
+        return runnable.getSuccessfulRuns();
     }
 
-    public static void serialExecutionTest(Product product){
+    /**
+     * This function is called when the product is not expected to run in parallel.
+     * @param product - The product who's availability is to be tested.
+     * @return the number of successful runs
+     */
+    private static int serialExecutionTest(Product product){
         int successfulRuns = 0;
         for(int runCount = 1; runCount <= NO_OF_TRIES; runCount++){
             if(runExecutable(product.getExecutablePath())){
                 successfulRuns++;
             }
         }
-
-        if (successfulRuns > ((NO_OF_TRIES/2) + 1))
-            System.out.println("Available");
-        else if(successfulRuns == ((NO_OF_TRIES/2) + 1))
-            System.out.println("Inconclusive");
-        else
-            System.out.println("Not available");
+        return successfulRuns;
     }
 
     /**
