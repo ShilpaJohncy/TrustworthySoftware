@@ -13,11 +13,12 @@ public final class Constants {
     public static final String NVD_BASE_URL = "https://nvd.nist.gov";
     public static final String NVD_SEARCH_POSTFIX = "/products/cpe/search?";
     public static final String CPE_PREFIX = "cpe:2.3:a:";
+    public static final String MANALYZER_URL = "https://manalyzer.org";
 
     // The executables
     public static final String WINCHECKSEC_EXE = "src/main/resources/winchecksec/winchecksec.exe";
 
     public static final int NO_OF_TRIES = 5;
-    public static final long NAIVE_TIMEOUT = 1000l;
-    public static final long LONGER_TIMEOUT = 50000l;
+    public static final long NAIVE_TIMEOUT = 1000L;
+    public static final long LONGER_TIMEOUT = 50000L;
 }

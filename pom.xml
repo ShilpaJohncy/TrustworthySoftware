@@ -22,16 +22,6 @@
         </plugins>
     </build>
 
-<!--    <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-compiler-plugin</artifactId>-->
-<!--        <configuration>-->
-<!--            <source>8</source>-->
-<!--            <target>8</target>-->
-<!--        </configuration>-->
-<!--    </plugin>-->
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -68,6 +58,26 @@
             <artifactId>org.json</artifactId>
             <version>chargebee-1.0</version>
         </dependency>
+
+<!--    Apache Http dependencies(x3) for sending POST and GET requests to Manalyze -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
 
     </dependencies>
     

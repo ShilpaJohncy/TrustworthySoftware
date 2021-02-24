@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseJson {
+public class WinchecksecResponse {
     private String path;
-    private ResponseEntities mitigations;
+    private WinchecksecEntities mitigations;
 }

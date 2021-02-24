@@ -100,7 +100,7 @@ public class AvailabilityTests {
         long pid = process.pid();
 
         Optional<ProcessHandle> optionalProcessHandle = ProcessHandle.of(pid);
-        optionalProcessHandle.ifPresent(processHandle -> processHandle.destroy());
+        optionalProcessHandle.ifPresent(ProcessHandle::destroy);
 
         if (process.isAlive()) {
             process.destroyForcibly();
