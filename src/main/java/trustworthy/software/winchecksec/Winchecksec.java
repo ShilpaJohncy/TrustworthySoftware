@@ -37,7 +37,7 @@ public class Winchecksec {
         // Set the response to the response object
         JSONObject jsonResponse = new JSONObject(output);
         Gson gson = new GsonBuilder().create();
-        gson.fromJson(String.valueOf(jsonResponse), ResponseJson.class);
+        gson.fromJson(String.valueOf(jsonResponse), WinchecksecResponse.class);
 
     }
 

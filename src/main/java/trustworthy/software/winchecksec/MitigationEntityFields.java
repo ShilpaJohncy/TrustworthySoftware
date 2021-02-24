@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseEntityFields {
+public class MitigationEntityFields {
     private String description;
     private String presence;
 }
