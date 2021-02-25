@@ -11,6 +11,7 @@ public class Product {
 
     private String vendorName;
     private String productName;
+    private String versionNo = "";
     private String executablePath;
     private boolean isParallelize = false;
     private boolean checkNaive = true;

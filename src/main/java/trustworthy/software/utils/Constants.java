@@ -21,4 +21,10 @@ public final class Constants {
     public static final int NO_OF_TRIES = 5;
     public static final long NAIVE_TIMEOUT = 1000L;
     public static final long LONGER_TIMEOUT = 50000L;
+
+    // Weightage for the CVSS severity ratings
+    public static final int CRITICAL_WEIGHTAGE = 4;
+    public static final int HIGH_WEIGHTAGE = 3;
+    public static final int MEDIUM_WEIGHTAGE = 2;
+    public static final int LOW_WEIGHTAGE = 1;
 }

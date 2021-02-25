@@ -8,26 +8,48 @@ import org.jsoup.nodes.FormElement;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
+import static trustworthy.software.cvss.CVSSSeverity.*;
 import static trustworthy.software.utils.Constants.*;
 
 
-public class CVSSTest {
+public class ExtractCVSS {
 
-    public static void extractCVSSScore(String vendor, String product, String versionNo){
+    /**
+     * Function to create a map to hold the number of vulnerabilities for each severity category.
+     * The number of vulnerabilities for each is initially set to 0.
+     *
+     * @return - The initialised map
+     */
+    private static HashMap<CVSSSeverity, Integer> initialiseMap(){
+        HashMap<CVSSSeverity, Integer> scoreRatings = new HashMap<>();
+        scoreRatings.put(CRITICAL, 0);
+        scoreRatings.put(HIGH, 0);
+        scoreRatings.put(MEDIUM, 0);
+        scoreRatings.put(LOW, 0);
+        return scoreRatings;
+    }
+
+
+    /**
+     * Function to webscrape the NVD website and extract the CVSS v3.1 scores for product specified.
+     *
+     * @param vendor - The vendor of the product
+     * @param product - The product name
+     * @param versionNo - The version of the product to be tested
+     * @return - A map with the number of vulnerabilities present in the product for each CVSS severity category.
+     *         - If the NVD does not hold any data for the product specified, return null.
+     */
+    public static HashMap<CVSSSeverity, Integer> extractCVSSScore(String vendor, String product, String versionNo){
         try{
-
+            HashMap<CVSSSeverity, Integer> scoreRatings = initialiseMap();
             Element searchLinks;
-            List<Double> scores = new ArrayList<>();
             String[] CVSSScoreArray;
-            double totalScore = 0.0;
-            DecimalFormat df = new DecimalFormat("#.#");
 
             // Connect to the NVD search webpage
             Connection.Response searchBoxResponse = Jsoup.connect(NVD_BASE_URL + NVD_SEARCH_POSTFIX)
+                    .timeout(0)
                     .method(Connection.Method.GET)
                     .userAgent(USER_AGENT)
                     .execute();
@@ -42,12 +64,17 @@ public class CVSSTest {
 
             // Execute the search
             Connection.Response searchResults = searchBox.submit()
+                    .timeout(0)
                     .cookies(searchBoxResponse.cookies())
                     .userAgent(USER_AGENT)
                     .execute();
 
-            // Extracting the links to the CVEs page from the search results
+            // If the search wasn't successful, return null
+            if(searchResults == null){
+                return null;
+            }
 
+            // Extracting the links to the CVEs page from the search results
             // If version number is not provided, get the CVSS score for the latest available product version
             if(versionNo.isEmpty()) {
                 Document parsedSearchResult = searchResults.parse();
@@ -56,6 +83,7 @@ public class CVSSTest {
                 // If there are multiple pages, go to the last page, last link
                 if(lastPage != null) {
                     searchResults = Jsoup.connect(NVD_BASE_URL + lastPage.attr("href"))
+                            .timeout(0)
                             .method(Connection.Method.GET)
                             .userAgent(USER_AGENT)
                             .execute();
@@ -67,11 +95,13 @@ public class CVSSTest {
                 searchLinks = searchResults.parse()
                         .selectFirst("table[class$=table table-striped table-hover] > tbody > tr > td > div[class$=row] > div[class$=col-lg-12] > a[class$=btn btn-sm]");
             }
-            String link = searchLinks.attr("href");
+
+            String link = (searchLinks == null) ? null : searchLinks.attr("href");
 
             if(link != null) {
                 // Go to the CVE page extracted
                 Connection.Response CVEPage = Jsoup.connect(NVD_BASE_URL + link)
+                        .timeout(0)
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
                         .execute();
@@ -83,19 +113,16 @@ public class CVSSTest {
                     // Calculate the average of all the CVSS scores - unweighted
                     for(Element vulnerability : vulnerabilityList) {
                         CVSSScoreArray = ((vulnerability.select("#cvss3-link > a").text()).split(" "));
-                        scores.add(Double.parseDouble(CVSSScoreArray[0]));
+                        CVSSSeverity severityClass = CVSSSeverity.valueOf(CVSSScoreArray[1]);
+                        scoreRatings.put(severityClass, scoreRatings.get(severityClass) + 1);
                     }
-                    for (Double score : scores) {
-                        totalScore += score;
-                    }
-                    totalScore /= scores.size();
                 }
-                System.out.println("Score = " + Double.valueOf(df.format(totalScore)));
+                return scoreRatings;
             }
-
         }catch(IOException e){
             e.printStackTrace();
         }
+        return null;
     }
 
 }
