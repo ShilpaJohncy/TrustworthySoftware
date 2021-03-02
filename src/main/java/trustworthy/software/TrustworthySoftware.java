@@ -2,16 +2,19 @@ package trustworthy.software;
 
 import trustworthy.software.utils.Product;
 
-import static trustworthy.software.cvss.CalculateCVSSScore.calculateCVSSScore;
+import static trustworthy.software.securityTest.calculateSecurityScore.runSecurityTests;
 import static trustworthy.software.utils.Constants.*;
 
 public class TrustworthySoftware {
     public static void main(String[] args){
 
-        Product product1 = new Product();
-        product1.setExecutablePath(NOTEPAD_EXE);
-        product1.setParallelize(true);
+        Product product = new Product();
+        product.setExecutablePath(ZOOM_EXE);
+        product.setVendorName("Zoom");
+        product.setProductName("zoom");
+        product.setParallelize(false);
 
+        runSecurityTests(product);
 
 //        getManalyzeReport(product);
 //        try {

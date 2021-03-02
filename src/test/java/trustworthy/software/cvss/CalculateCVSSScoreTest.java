@@ -42,7 +42,8 @@ public class CalculateCVSSScoreTest {
 //        extractCVSSScore("adobe", "acrobat_reader_dc", "20.012.20048");
 //        extractCVSSScore("mcafee", "livesafe", "");
 
-        assertEquals(calculateCVSSScore(product), 8.75, 0);
+        calculateCVSSScore(product);
+        assertEquals(product.getCvssScore(), 8.75, 0);
     }
 
     @Test
@@ -54,6 +55,7 @@ public class CalculateCVSSScoreTest {
         product.setProductName("zoom");
         product.setParallelize(false);
 
-        assertEquals(calculateCVSSScore(product), 8.75, 0);
+        calculateCVSSScore(product);
+        assertEquals(8.75, product.getCvssScore() , 0);
     }
 }

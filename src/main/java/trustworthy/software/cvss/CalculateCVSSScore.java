@@ -27,10 +27,10 @@ public class CalculateCVSSScore {
 
     /**
      * Calculate the weighted CVSS score for the given Product
-     * @param product - The product who's CVSS score is to be calculated.
-     * @return - The weighted CVSS score. If the CVSS score could no tbe extracted, returns -1.
+     * @param product - The product who's CVSS score is to be calculated
+     * If the CVSS score could not be extracted, returns -1.
      */
-    public static double calculateCVSSScore(Product product){
+    public static void calculateCVSSScore(Product product){
         HashMap<CVSSSeverity, Integer> cvssScore = extractCVSSScore(product.getVendorName(), product.getProductName(), product.getVersionNo());
         if(cvssScore != null){
             HashMap<CVSSSeverity, Integer> weightedSeverity = getWeightedMap();
@@ -42,8 +42,9 @@ public class CalculateCVSSScore {
                 totalVulnerabilityCount += entry.getValue();
             }
             weightedTotal = (weightedTotal/(totalVulnerabilityCount * CRITICAL_WEIGHTAGE)) * 100;
-            return weightedTotal/10;
+            product.setCvssScore(weightedTotal/10);
+        }else{
+            product.setCvssScore(-1);
         }
-        return -1;
     }
 }

@@ -7,6 +7,9 @@ import static trustworthy.software.availabilityTest.AvailabilityTests.runExecuta
 
 @Getter
 @Setter
+/**
+ * For implementation of multiple threads.
+ */
 public class RunnableImplementation implements Runnable {
 
     private int successfulRuns = 0;
