@@ -31,7 +31,7 @@ public class Product {
     private boolean authenticode;
     private boolean dotNET;
 
-    private int securityScore;
+    private double securityScore;
     private int safetyScore;
     private int availabilityScore;
     private int trustworthyScore;

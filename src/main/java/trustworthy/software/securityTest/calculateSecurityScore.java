@@ -2,11 +2,11 @@ package trustworthy.software.securityTest;
 
 import org.json.JSONException;
 import trustworthy.software.utils.Product;
-import trustworthy.software.winchecksec.WinchecksecResponse;
 
 import java.io.IOException;
 
 import static trustworthy.software.cvss.CalculateCVSSScore.calculateCVSSScore;
+import static trustworthy.software.utils.Constants.SECURITY_WEIGHTAGE;
 import static trustworthy.software.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class calculateSecurityScore {
@@ -16,10 +16,12 @@ public class calculateSecurityScore {
      */
     //TODO: To deal with the CVSS score and/or winchecksec score of -1.
     public static void runSecurityTests(Product product){
-        int securityScore = 0;
+        double securityScore;
         int cvssScore = getCVSSScore(product);
         int wincheckScore = getWeightedWinchecksecScores(product);
         securityScore = cvssScore + wincheckScore;
+        securityScore *= (SECURITY_WEIGHTAGE);
+        securityScore = securityScore/100;
         product.setSecurityScore(securityScore);
     }
 
