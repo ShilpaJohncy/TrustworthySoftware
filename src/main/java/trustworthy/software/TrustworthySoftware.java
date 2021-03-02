@@ -2,6 +2,7 @@ package trustworthy.software;
 
 import trustworthy.software.utils.Product;
 
+import static trustworthy.software.safetyTest.calculateSafetyScore.runSafetyTests;
 import static trustworthy.software.securityTest.calculateSecurityScore.runSecurityTests;
 import static trustworthy.software.utils.Constants.*;
 
@@ -15,8 +16,7 @@ public class TrustworthySoftware {
         product.setParallelize(false);
 
         runSecurityTests(product);
-
-//        getManalyzeReport(product);
+        runSafetyTests(product);
 //        try {
 //            runAvailabilityTest(product);
 //            runAvailabilityTest(product1);

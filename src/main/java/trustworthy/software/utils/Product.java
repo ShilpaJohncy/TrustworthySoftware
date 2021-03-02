@@ -16,7 +16,10 @@ public class Product {
     private boolean isParallelize = false;
     private boolean checkNaive = true;
 
+    private boolean ranWinchecksec = false;
+
     private double cvssScore;
+    private double manalyzeScore;
     private boolean dynamicBase;
     private boolean aslr;
     private boolean highEntropyVA;
@@ -32,7 +35,7 @@ public class Product {
     private boolean dotNET;
 
     private double securityScore;
-    private int safetyScore;
+    private double safetyScore;
     private int availabilityScore;
     private int trustworthyScore;
     private String verdict;

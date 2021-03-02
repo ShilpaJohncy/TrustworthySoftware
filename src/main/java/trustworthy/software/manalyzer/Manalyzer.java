@@ -24,17 +24,33 @@ public class Manalyzer {
 
         //Retrieve the report using the taskId and parse the jsonOutput to get the field values we want
         JSONObject manalyzeReport = getReport(taskId);
-        if(manalyzeReport == null){
-            System.out.println("Cannot get manalyze score");
-        }
-        ArrayList<Integer> pluginScores = getPluginScores(manalyzeReport, taskId);
+        if(manalyzeReport != null){
+            ArrayList<Integer> pluginScores = getPluginScores(manalyzeReport, taskId);
 
-        if(pluginScores!= null){
-            // TODO: DO some calculation with these scores
-            System.out.println("The no of plugins run = " + pluginScores.get(pluginScores.size()-1));
-            System.out.println("The scores received = ");
-            for (int i = 0; i < pluginScores.size() - 1; i++) {
-                System.out.println(pluginScores.get(i));
+            // Translate the manalyze score to the safety score
+            if(pluginScores!= null){
+                double manalyzeScore = 0;
+                int pluginCount = pluginScores.get(pluginScores.size()-1);
+                for (int i = 0; i < pluginCount; i++) {
+                    switch (pluginScores.get(i)){
+                        case 3:
+                            manalyzeScore += 0;
+                            break;
+                        case 2:
+                            manalyzeScore += 2;
+                            break;
+                        case 1:
+                            manalyzeScore += 3;
+                            break;
+                        case 0:
+                            manalyzeScore += 5;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                // Scale the score up/down to out of 30.
+                product.setManalyzeScore(manalyzeScore/(pluginCount*5) * 30);
             }
         }
     }

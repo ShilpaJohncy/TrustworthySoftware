@@ -22,30 +22,33 @@ public class Winchecksec {
      * @throws JSONException
      */
     public static void getWinCheckSecScores(Product product) throws IOException, JSONException {
-        Runtime rt = Runtime.getRuntime();
-        Process proc = rt.exec(WINCHECKSEC_EXE + " --json " + product.getExecutablePath() );
-        BufferedReader stdInput = new BufferedReader(new
-                InputStreamReader(proc.getInputStream()));
+        if(!product.isRanWinchecksec()){
+            Runtime rt = Runtime.getRuntime();
+            Process proc = rt.exec(WINCHECKSEC_EXE + " --json " + product.getExecutablePath() );
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(proc.getInputStream()));
 
-        BufferedReader stdError = new BufferedReader(new
-                InputStreamReader(proc.getErrorStream()));
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(proc.getErrorStream()));
 
-        // Read the output from the command
-        String s;
-        String output = "";
+            // Read the output from the command
+            String s;
+            String output = "";
 
-        //Get the output from the command line
-        while ((s = stdInput.readLine()) != null) {
-            output = output.concat(s);
+            //Get the output from the command line
+            while ((s = stdInput.readLine()) != null) {
+                output = output.concat(s);
+            }
+            // Format response to rqd JSON format
+            output = output.substring(1, output.length() - 1);
+
+            // Set the response to the response object
+            JSONObject jsonResponse = new JSONObject(output);
+            Gson gson = new GsonBuilder().create();
+            WinchecksecResponse response = gson.fromJson(String.valueOf(jsonResponse), WinchecksecResponse.class);
+            setWinchecksecPresence(response, product);
+            product.setRanWinchecksec(true);
         }
-        // Format response to rqd JSON format
-        output = output.substring(1, output.length() - 1);
-
-        // Set the response to the response object
-        JSONObject jsonResponse = new JSONObject(output);
-        Gson gson = new GsonBuilder().create();
-        WinchecksecResponse response = gson.fromJson(String.valueOf(jsonResponse), WinchecksecResponse.class);
-        setWinchecksecPresence(response, product);
     }
 
     /**
