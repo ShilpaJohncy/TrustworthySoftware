@@ -41,13 +41,13 @@ public class TrustworthySoftware {
         double trustworthyScore = product.getSecurityScore() + product.getAvailabilityScore() + product.getSafetyScore() + product.getResilienceScore();
         product.setTrustworthyScore(trustworthyScore);
         if (trustworthyScore < 25) {
-            product.setVerdict("Not Trustworthy");
+            product.setVerdict(NOT_TRUSTWORTHY);
         }else if (trustworthyScore >= 25 && trustworthyScore < 50) {
-            product.setVerdict("Inconclusive - more likely to be NOT trustworthy");
+            product.setVerdict(INCONCLUSIVE_LOW);
         }else if (trustworthyScore >= 50 && trustworthyScore < 75) {
-            product.setVerdict("Inconclusive - more likely to be trustworthy");
+            product.setVerdict(INCONCLUSIVE_HIGH);
         }else if (trustworthyScore >= 75) {
-            product.setVerdict("Trustworthy");
+            product.setVerdict(TRUSTWORTHY);
         }
     }
 }

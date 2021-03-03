@@ -35,4 +35,11 @@ public final class Constants {
     public static final int RESILIENCE_WEIGHTAGE = 20;
     public static final int RELIABILITY_WEIGHTAGE = 20;
 
+    // Trustworthy Verdict - possible values
+    public static final String TRUSTWORTHY = "Trustworthy";
+    public static final String NOT_TRUSTWORTHY = "Not Trustworthy";
+    public static final String INCONCLUSIVE_LOW = "Data gathered on the product is inconclusive, the product looks more likely to be NOT trustworthy ";
+    public static final String INCONCLUSIVE_HIGH = "Data gathered on the product is inconclusive, the product looks more likely to be trustworthy ";
+
+
 }
