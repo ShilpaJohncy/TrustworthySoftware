@@ -21,7 +21,6 @@ public class calculateSafetyScore {
         getManalyzeReport(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
         safetyScore = product.getManalyzeScore() + winchecksecScore;
-        System.out.println(safetyScore);
         safetyScore = safetyScore/100;
         safetyScore *= SAFETY_WEIGHTAGE;
         product.setSafetyScore(safetyScore);

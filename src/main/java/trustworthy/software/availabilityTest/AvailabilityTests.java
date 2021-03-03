@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static trustworthy.software.utils.Constants.NAIVE_TIMEOUT;
-import static trustworthy.software.utils.Constants.NO_OF_TRIES;
+import static trustworthy.software.utils.Constants.*;
 
 public class AvailabilityTests {
 
@@ -20,24 +19,41 @@ public class AvailabilityTests {
      *
      * @param product - The product who's availability is to be tested
      */
-    public static void runAvailabilityTest(Product product) throws InterruptedException{
+    public static void runAvailabilityTest(Product product) {
+        double availabilityScore = 0;
         int successfulRuns;
         if(!product.isParallelize()){
             successfulRuns = serialExecutionTest(product);
         }else{
-            successfulRuns = parallelExecutionTest(product);
+            try {
+                successfulRuns = parallelExecutionTest(product);
+            } catch (InterruptedException e) {
+                successfulRuns = 0;
+            }
         }
 
-        if (successfulRuns > ((NO_OF_TRIES/2) + 1))
-            System.out.println("Available");
-        else if(successfulRuns == ((NO_OF_TRIES/2) + 1))
-            System.out.println("Inconclusive");
-        else
-            System.out.println("Not available");
+        // Available all the time
+        if (successfulRuns == NO_OF_TRIES){
+            availabilityScore = 3;
+        }
+        // Available more than half the time
+        else if (successfulRuns > ((NO_OF_TRIES/2) + 1)){
+            availabilityScore = 2;
+        }
+        // Inconclusive
+        else if(successfulRuns == ((NO_OF_TRIES/2) + 1)){
+            availabilityScore = 1;
+        }
+        // Not available
+        else{
+            availabilityScore = 0;
+        }
+        product.setAvailabilityScore(availabilityScore * AVAILABILITY_WEIGHTAGE / 3);
     }
 
     /**
      * This function is called if the product is expected to run in parallel.
+     *
      * @param product - The product who's availability is to be tested.
      * @throws InterruptedException - When the thread is interrupted.
      * @return the number of successful runs
@@ -59,6 +75,7 @@ public class AvailabilityTests {
 
     /**
      * This function is called when the product is not expected to run in parallel.
+     *
      * @param product - The product who's availability is to be tested.
      * @return the number of successful runs
      */
@@ -73,7 +90,8 @@ public class AvailabilityTests {
     }
 
     /**
-     * Function that executes the program once
+     * Function that executes the program once.
+     *
      * @param productExePath - The path to the executable of the product to be tested.
      * @return {@code true} if the process ran without any issues and {@code false} if
      *              the process was unable to run for the set timeout time/ if the process got interrupted.
@@ -86,25 +104,34 @@ public class AvailabilityTests {
             process = builder.start();
 
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
-            if(process == null | process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
+            if(process == null || process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
+                killProcess(process);
                 return false;
             }
 
         } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
             return false;
         }
 
         // Reaches here if the process ran without any problem
         // Get the PID of the process and kill it
-        long pid = process.pid();
-
-        Optional<ProcessHandle> optionalProcessHandle = ProcessHandle.of(pid);
-        optionalProcessHandle.ifPresent(ProcessHandle::destroy);
-
-        if (process.isAlive()) {
-            process.destroyForcibly();
-        }
+        killProcess(process);
         return true;
+    }
+
+    /**
+     * Private function to ensure that the process and its children are killed.
+     *
+     * @param process - The process to be killed
+     */
+    private static void killProcess(Process process){
+        if(process != null){
+            long pid = process.pid();
+            Optional<ProcessHandle> optionalProcessHandle = ProcessHandle.of(pid);
+            optionalProcessHandle.ifPresent(ProcessHandle::destroy);
+            if (process.isAlive()) {
+                process.destroyForcibly();
+            }
+        }
     }
 }
