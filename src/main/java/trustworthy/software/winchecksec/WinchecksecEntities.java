@@ -19,5 +19,4 @@ public class WinchecksecEntities {
     private MitigationEntityFields gs;
     private MitigationEntityFields authenticode;
     private MitigationEntityFields dotNET;
-
 }
