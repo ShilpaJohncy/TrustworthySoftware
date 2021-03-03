@@ -9,7 +9,7 @@ import static trustworthy.software.cvss.CalculateCVSSScore.calculateCVSSScore;
 import static trustworthy.software.utils.Constants.SECURITY_WEIGHTAGE;
 import static trustworthy.software.winchecksec.Winchecksec.getWinCheckSecScores;
 
-public class calculateSecurityScore {
+public class CalculateSecurityScore {
     /**
      * Run all the tests for calculating the security of a product
      * @param product - the application to be tested

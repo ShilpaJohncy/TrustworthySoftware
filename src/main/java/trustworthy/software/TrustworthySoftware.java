@@ -4,9 +4,10 @@ import trustworthy.software.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.software.availabilityTest.AvailabilityTests.runAvailabilityTest;
-import static trustworthy.software.safetyTest.calculateSafetyScore.runSafetyTests;
-import static trustworthy.software.securityTest.calculateSecurityScore.runSecurityTests;
+import static trustworthy.software.availabilityTest.CalculateAvailabilityScore.runAvailabilityTest;
+import static trustworthy.software.resiliencyTest.CalculateResiliencyScore.runResiliencyTest;
+import static trustworthy.software.safetyTest.CalculateSafetyScore.runSafetyTests;
+import static trustworthy.software.securityTest.CalculateSecurityScore.runSecurityTests;
 import static trustworthy.software.utils.Constants.*;
 
 public class TrustworthySoftware {
@@ -25,6 +26,7 @@ public class TrustworthySoftware {
         runSecurityTests(product);
         runSafetyTests(product);
         runAvailabilityTest(product2);
+        runResiliencyTest(product);
 
     }
 }

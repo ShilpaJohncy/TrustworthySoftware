@@ -37,6 +37,7 @@ public class Product {
     private double securityScore;
     private double safetyScore;
     private double availabilityScore;
+    private double resilienceScore;
     private int trustworthyScore;
     private String verdict;
 

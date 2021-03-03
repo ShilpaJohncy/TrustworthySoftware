@@ -3,9 +3,7 @@ package trustworthy.software.availabilityTest;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
-
-import static trustworthy.software.availabilityTest.AvailabilityTests.runExecutable;
+import static trustworthy.software.availabilityTest.CalculateAvailabilityScore.runExecutable;
 
 @Getter
 @Setter

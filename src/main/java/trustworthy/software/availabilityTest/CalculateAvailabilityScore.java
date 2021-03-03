@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import static trustworthy.software.utils.Constants.*;
 
-public class AvailabilityTests {
+public class CalculateAvailabilityScore {
 
     /**
      * Runs the test to check availability using a naive equation

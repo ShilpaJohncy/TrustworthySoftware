@@ -9,7 +9,7 @@ import static trustworthy.software.manalyzer.Manalyzer.getManalyzeReport;
 import static trustworthy.software.utils.Constants.SAFETY_WEIGHTAGE;
 import static trustworthy.software.winchecksec.Winchecksec.getWinCheckSecScores;
 
-public class calculateSafetyScore {
+public class CalculateSafetyScore {
 
     /**
      * Function to run all tests required to extract a score for the safety of a given product
