@@ -10,7 +10,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static trustworthy.software.cvss.CVSSSeverity.*;
 import static trustworthy.software.utils.Constants.*;
 
 
@@ -24,10 +23,10 @@ public class ExtractCVSS {
      */
     private static HashMap<CVSSSeverity, Integer> initialiseMap(){
         HashMap<CVSSSeverity, Integer> scoreRatings = new HashMap<>();
-        scoreRatings.put(CRITICAL, 0);
-        scoreRatings.put(HIGH, 0);
-        scoreRatings.put(MEDIUM, 0);
-        scoreRatings.put(LOW, 0);
+        scoreRatings.put(CVSSSeverity.CRITICAL, 0);
+        scoreRatings.put(CVSSSeverity.HIGH, 0);
+        scoreRatings.put(CVSSSeverity.MEDIUM, 0);
+        scoreRatings.put(CVSSSeverity.LOW, 0);
         return scoreRatings;
     }
 

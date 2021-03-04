@@ -9,6 +9,7 @@ import static trustworthy.software.securityTest.CalculateSecurityScore.runSecuri
 import static trustworthy.software.utils.Constants.*;
 
 public class TrustworthySoftware {
+    
     public static void main(String[] args) {
 
 //        Product product = new Product();
@@ -40,14 +41,16 @@ public class TrustworthySoftware {
     private static void calculateVerdict(Product product) {
         double trustworthyScore = product.getSecurityScore() + product.getAvailabilityScore() + product.getSafetyScore() + product.getResilienceScore();
         product.setTrustworthyScore(trustworthyScore);
-        if (trustworthyScore < 25) {
-            product.setVerdict(NOT_TRUSTWORTHY);
-        }else if (trustworthyScore >= 25 && trustworthyScore < 50) {
-            product.setVerdict(INCONCLUSIVE_LOW);
-        }else if (trustworthyScore >= 50 && trustworthyScore < 75) {
-            product.setVerdict(INCONCLUSIVE_HIGH);
-        }else if (trustworthyScore >= 75) {
-            product.setVerdict(TRUSTWORTHY);
+        if (trustworthyScore < 20) {
+            product.setVerdict(VERY_LOW);
+        }else if (trustworthyScore >= 20 && trustworthyScore < 40) {
+            product.setVerdict(LOW);
+        }else if (trustworthyScore >= 40 && trustworthyScore < 60) {
+            product.setVerdict(INCONCLUSIVE);
+        }else if (trustworthyScore >= 60 && trustworthyScore < 80) {
+            product.setVerdict(HIGH);
+        }else if (trustworthyScore >= 80) {
+            product.setVerdict(VERY_HIGH);
         }
     }
 }

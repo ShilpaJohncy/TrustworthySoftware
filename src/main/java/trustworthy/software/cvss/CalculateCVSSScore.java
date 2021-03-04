@@ -19,9 +19,9 @@ public class CalculateCVSSScore {
     private static HashMap<CVSSSeverity, Integer> getWeightedMap(){
         HashMap<CVSSSeverity, Integer> weightedSeverity = new HashMap<>();
         weightedSeverity.put(CRITICAL, CRITICAL_WEIGHTAGE);
-        weightedSeverity.put(HIGH, HIGH_WEIGHTAGE);
+        weightedSeverity.put(CVSSSeverity.HIGH, HIGH_WEIGHTAGE);
         weightedSeverity.put(MEDIUM, MEDIUM_WEIGHTAGE);
-        weightedSeverity.put(LOW, LOW_WEIGHTAGE);
+        weightedSeverity.put(CVSSSeverity.LOW, LOW_WEIGHTAGE);
         return weightedSeverity;
     }
 
