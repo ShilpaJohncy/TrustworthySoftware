@@ -12,25 +12,19 @@ public class TrustworthySoftware {
     
     public static void main(String[] args) {
 
-//        Product product = new Product();
-//        product.setExecutablePath(ZOOM_EXE);
-//        product.setVendorName("Zoom");
-//        product.setProductName("zoom");
-//        product.setParallelize(false);
+        Product product = new Product();
+        product.setExecutablePath(NOTEPAD_EXE);
+        product.setVendorName("notepad-plus-plus");
+        product.setProductName("Notepad\\+\\+");
+        product.setVersionNo("7.6.6");
+        product.setParallelize(true);
 
-        Product product2 = new Product();
-        product2.setExecutablePath(NOTEPAD_EXE);
-        product2.setVendorName("notepad-plus-plus");
-        product2.setProductName("Notepad\\+\\+");
-        product2.setVersionNo("7.6.6");
-        product2.setParallelize(true);
+        runSecurityTests(product);
+        runSafetyTests(product);
+        runAvailabilityTest(product);
+        runResiliencyTest(product);
 
-        runSecurityTests(product2);
-        runSafetyTests(product2);
-        runAvailabilityTest(product2);
-        runResiliencyTest(product2);
-
-        calculateVerdict(product2);
+        calculateVerdict(product);
 
     }
 
