@@ -42,7 +42,7 @@ public class ManalyzerAPI {
                 JSONObject jsonResponse = new JSONObject(responseString);
                 return jsonResponse;
             }else{
-                System.out.println("Could not find the report for the given md5");
+                System.out.println("Could not find the report for the given md5 " + md5);
                 return null;
             }
         } catch (IOException |JSONException e) {
@@ -79,6 +79,7 @@ public class ManalyzerAPI {
             uploadFile.setEntity(multipart);
             CloseableHttpResponse response = httpClient.execute(uploadFile);
             HttpEntity responseEntity = response.getEntity();
+
             if(response.getStatusLine().getStatusCode() != 200){
                 return null;
             }
