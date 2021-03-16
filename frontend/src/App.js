@@ -1,58 +1,61 @@
 import React from "react";
 import ReactDOM from "react-dom"
-// import About from "./About";
-// import {useHistory} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import {Link} from "react-router-dom";
 
 const App = () => {
-    const [startAnimate, setStartAnimate] = React.useState(false);
     const [highlightTopPosition, setStateHighlightTopPosition] = React.useState(0);
     const [currCount, setCurrCount] = React.useState(0);
 
-    // const history = useHistory();
-
     const onClickTab = (count) => {
-        setStartAnimate(false);
         setCurrCount(count);
         setStateHighlightTopPosition(count * 52);
-        // history.push(About);
         setTimeout(() => {
-            setStartAnimate(true);
         }, 100);
     }
 
-    React.useEffect(() => {
-
-        setTimeout(() => {
-            setStartAnimate(true);
-        }, 500);
-
-        return () => {
-
-        }
-    }, []);
-
     return (
-        <div className="container">
-            {/* <h1>Sidebar animation example</h1> */}
-            <div className="sidebar">
-                <div style={{ top: `${highlightTopPosition}px` }} className={`sidebar__highlight ${startAnimate && 'sidebar__highlight__animate'}`}></div>
-                {/* note: will still have to think about this implementation */}
-                {/* <div style={{ position: "absolute", height: "500px", width: "50px", backgroundColor: "#049DBF", zIndex: "-1" }}></div> */}
+        <Router>
+            <main>
+                <nav>
+                    <div className="container">
+                        <div className="navbar">
+                            <div style={{top: `${highlightTopPosition}px`}}/>
 
-                <a className={currCount === 0 && 'active'} href= "/About" onClick={() => onClickTab(0)}>
-                    <span className={currCount === 0 && 'text-active'}><i class="fas fa-arrow-right"></i> Home</span>
-                </a>
-                <a className={currCount === 1 && 'active'} href="/xyz" onClick={() => onClickTab(1)}>
-                    <span className={currCount === 1 && 'text-active'}><i class="fas fa-arrow-right"></i> News</span>
-                </a>
-                <a className={currCount === 2 && 'active'} href="/contact" onClick={() => onClickTab(2)}>
-                    <span className={currCount === 2 && 'text-active'}><i class="fas fa-arrow-right"></i> Contact</span>
-                </a>
-                <a className={currCount === 3 && 'active'} href="/developers" onClick={() => onClickTab(3)}>
-                    <span className={currCount === 3 && 'text-active'}><i class="fas fa-arrow-right"></i> About</span>
-                </a>
-            </div>
-        </div>
+                            <Link className={currCount === 0 && 'active'} onClick={() => onClickTab(0)} to="/">
+                                <span className={currCount === 0 && 'text-active'}> Home</span>
+                            </Link>
+
+                            <Link className={currCount === 1 && 'active'} onClick={() => onClickTab(1)} to="/About">
+                                <span className={currCount === 1 && 'text-active'}> About</span>
+                            </Link>
+
+                            <Link className={currCount === 2 && 'active'} onClick={() => onClickTab(2)} to="/About">
+                                <span className={currCount === 2 && 'text-active'}>Documentation</span>
+                            </Link>
+
+                            <Link className={currCount === 3 && 'active'} onClick={() => onClickTab(3)} to="/About">
+                                <span className={currCount === 3 && 'text-active'}>Contact</span>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="content">
+                        <Switch>
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route path="/About">
+                                <About />
+                            </Route>
+                        </Switch>
+                    </div>
+
+                </nav>
+            </main>
+        </Router>
     )
 }
 

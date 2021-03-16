@@ -1,136 +1,89 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://kit-free.fontawesome.com/releases/latest/css/free.min.css");
+.contents {
+  margin-top: 50px;
+  padding: 0;
+  overflow: auto;
+  text-align: center;
+  position: relative;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input-group-addon {
+  padding: 6px 150px;
+  font-size: 14px;
+  color: #6cbfb2;
+  background-color: #eee;
+  border: 1px solid #100f0f;
+  display: inline-block;
+  margin-bottom: 0;
+  line-height: 1.42857143;
+  text-align: center;
+  position: relative;
+}
+.text{
+  padding: 6px 15px;
+  width: 350px;
+}
+
+.btn {
+  padding: 6px 15px;
+}
+
+input[type="file"] {
+  display: none;
+}
 
 body {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Noto Sans", sans-serif;
-    height: 100%;
-    /*   // background-color: orange; */
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans", "SansSerif";
 }
 
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: fit-content;
-    background-color: #6cbfb2;
-    /*   // position: fixed; */
-    position: relative;
-    z-index: 0;
-    height: 720px;
-    overflow: auto;
-    transition: background-color 0.2s ease-in;
-
-/*   // height: "48px", width: "48px", backgroundColor: "orange", borderRadius: "50%", position: "absolute" */
-.highlight {
-    height: 55px;
-    width: 55px;
-    background-color: #f6f6f6;
-    border-radius: 50%;
-
-    position: absolute;
-
-.animate {
-    /*       // animation: test 2s cubic-bezier(0,0,0,2) 1s forwards; */
-    animation: test 0.2s cubic-bezier(0, 0, 1, 1) 0s forwards;
-}
-
-}
-}
-
-@keyframes test {
-    0% {
-        height: 55px;
-        width: 55px;
-        background-color: #f6f6f6;
-        border-radius: 50%;
-    }
-    50% {
-        border-radius: 0 25px 25px 0;
-        width: 70px;
-    }
-    100% {
-        background-color: #f6f6f6;
-        width: 200px;
-        border-radius: 0;
-    }
-}
-
-@keyframes animFullSidebar {
-    0% {
-        height: 500px;
-        width: 55px;
-        background-color: #f6f6f6;
-        border-radius: 50%;
-    }
-    50% {
-        border-radius: 0 25px 25px 0;
-        width: 70px;
-    }
-}
-
-.sidebar a {
-    display: block;
-    color: black;
-    padding: 15px 30px;
-    text-decoration: none;
-
-span {
-    font-size: 14px;
-    position: relative;
-    z-index: 999;
-    transition: all 0.2s;
-
-i {
-    opacity: 0;
-    transition: opacity 0.5s;
-}
+.navbar {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 50px;
+  top: 0px;
+  position: relative;
+  z-index: 1000;
+  text-align: right;
+  background-color: #6cbfb2;
+  //float: left;
+  display: inline-block;
 
 }
 
-.hover {
-
-span {
-    margin-left: 10px;
-
-i {
-    opacity: 1;
+.navbar a {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  //text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+  letter-spacing: 1px;
+  position: relative;
+  margin-top: 15px;
+  margin-right: 15px;
+  display: inline-block;
+  border: #8b001c;
 }
 
-}
-}
-}
-
-.sidebar a.active {
-    /*   // background-color: #4CAF50; */
-    color: #f6f6f6;
-
-span {
-
-i {
-    opacity: 1;
+.navbar a text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
 
+.navbar a.active {
+  color: white;
 }
-}
-
-.text-active {
-    margin-left: 10px;
-
-::after {
-    content: "";
-    /*     // font-family: 'Font Awesome 5 Free'; */
-}
-
-}
-
-/* // .sidebar a:hover:not(.active) { */
-/* //   background-color: #555;
-//   color: white;
-// } */
 
 .container {
-    margin-left: 0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
