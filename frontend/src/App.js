@@ -6,25 +6,21 @@ import About from "./pages/About";
 import {Link} from "react-router-dom";
 
 const App = () => {
-    const [highlightTopPosition, setStateHighlightTopPosition] = React.useState(0);
     const [currCount, setCurrCount] = React.useState(0);
 
     const onClickTab = (count) => {
         setCurrCount(count);
-        setStateHighlightTopPosition(count * 52);
         setTimeout(() => {
         }, 100);
     }
 
     return (
         <Router>
-            <main>
-                <nav>
+            <main className={"bg"}>
+                <nav className="navbar navbar-default navbar-static-top">
                     <div className="container">
                         <div className="navbar">
-                            <div style={{top: `${highlightTopPosition}px`}}/>
-
-                            <Link className={currCount === 0 && 'active'} onClick={() => onClickTab(0)} to="/">
+                            <Link className={currCount === 0 && 'active ' } onClick={() => onClickTab(0)} to="/">
                                 <span className={currCount === 0 && 'text-active'}> Home</span>
                             </Link>
 

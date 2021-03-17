@@ -1,43 +1,111 @@
+.bg{
+  //background-image: linear-gradient(to top right, whitesmoke, #116466  );
+  //background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite); The good oneee till now
+  background-image: linear-gradient(to right,  #1e7a7c,#77C9D4, #57BC90);
+  //background-image: linear-gradient(to right, #77C9D4, #57BC90);
+  //background-image: linear-gradient(to top, #E9B000, floralwhite);
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+
+}
 .contents {
-  margin-top: 50px;
-  padding: 0;
+  margin-top: 300px;
   overflow: auto;
   text-align: center;
   position: relative;
   top: 25px;
   left: 50%;
   transform: translate(-50%, -50%);
+
+}
+
+.wrapper{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.box {
+  padding: 30px;
+  background: #dde9e5;
+  display: flex;
+  border: 1px solid #cdcdcd;
+  border-left: 7px solid grey;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-group-addon {
-  padding: 6px 150px;
-  font-size: 14px;
-  color: #6cbfb2;
-  background-color: #eee;
+  padding: 6px;
+  font-size: 16px;
   border: 1px solid #100f0f;
   display: inline-block;
   margin-bottom: 0;
   line-height: 1.42857143;
   text-align: center;
   position: relative;
+  margin-top: 4%;
 }
+
 .text{
-  padding: 6px 15px;
-  width: 350px;
+  max-width: 135px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: left;
+  margin-right: 25px;
 }
-
+.file-browse{
+  min-width: 450px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: left;
+  margin-right: 25px;
+}
+.percentage{
+  max-width: 30px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: center;
+  margin-right: 15px;
+}
+input:placeholder-shown {
+  font-style: italic;
+  opacity: 0.5;
+  background-color: white;
+  text-align: left;
+}
 .btn {
-  padding: 6px 15px;
+  position: relative;
+  text-align: center;
+  background-color: grey;
+  color: floralwhite;
+  min-width: 100px;
 }
-
-input[type="file"] {
+.field-label {
+  position: relative;
+  text-align: center;
+  background-color: #0c0c0c;
+  color: floralwhite;
+  min-width: 100px;
+}
+input[type="file"],  input[type="fieldLabel"] {
   display: none;
+}
+.icon{
+  padding-right: 5px;
 }
 
 body {
   margin: 0;
   box-sizing: border-box;
   font-family: "Noto Sans", "SansSerif";
+  //background-color: floralwhite;
+  //background-image: linear-gradient(to bottom, white, floralwhite, #83ddd2, #5fddcd);
+  //background-image: linear-gradient(to top, white, floralwhite, #83ddd2, #5fddcd);
+
 }
 
 .navbar {
@@ -49,16 +117,17 @@ body {
   position: relative;
   z-index: 1000;
   text-align: right;
-  background-color: #6cbfb2;
-  //float: left;
+  //background-color: #5fddcd;
   display: inline-block;
+  border-bottom-style: wave;
+  border-bottom-width: 0.5px;
+  border-bottom-color: whitesmoke;
 
 }
 
 .navbar a {
   font-family: 'Oswald', sans-serif;
   font-weight: 500;
-  //text-transform: uppercase;
   text-decoration: none;
   color: black;
   font-size: 15px;
@@ -67,7 +136,6 @@ body {
   margin-top: 15px;
   margin-right: 15px;
   display: inline-block;
-  border: #8b001c;
 }
 
 .navbar a text {
@@ -79,7 +147,7 @@ body {
 }
 
 .navbar a.active {
-  color: white;
+  color: floralwhite;
 }
 
 .container {
