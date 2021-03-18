@@ -3,22 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^4.6.0",
     "react": "^17.0.1",
-    "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
-    "react-range-step-input": "^1.3.0",
-    "react-router": "^5.2.0",
     "react-scripts": "4.0.3",
-    "sass": "^1.32.8",
-    "styled-components": "^5.2.1",
-    "styled-off-canvas": "^1.0.1",
-    "use-file-picker": "^0.2.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -44,10 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "axios": "^0.21.1",
-    "prop-types": "^15.7.2",
-    "react-router-dom": "^5.2.0"
   }
 }
