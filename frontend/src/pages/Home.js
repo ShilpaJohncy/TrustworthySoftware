@@ -1,25 +1,24 @@
 import React from "react";
-import { faFolder } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faFolder} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Home extends React.Component {
     constructor() {
         super();
-        this.state = {
-        };
-        this.onInputchange = this.onInputchange.bind(this);
+        this.state = {};
+        this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    onInputchange(event) {
+    onInputChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         });
     }
 
     onSubmitForm() {
-        console.log(this.state)
-        alert("Submitted")
+        console.log(this.state.vendor);
+        alert(this.state.vendor);
     }
 
 
@@ -27,88 +26,71 @@ class Home extends React.Component {
         return (
             <div className="contents">
                 <h1>Trustworthy Analyser</h1>
-                <p> Trustworthy Analyser is a free service which performs static analysis on PE executables to help determine its trustworthiness.</p>
-                <p> This tool is only meant to help aid the user in making a decision, and is not responsible for any choice made by the user!</p>
-
                 <div className="wrapper">
-                        <div className="box">
-                            <div>
-                                <form>
-                                    <label className={"btn input-group-addon"}>
-                                        <input name={"exe"} type="file" value={this.state.value} onChange={this.onInputchange}
-                                               accept={".exe"}/><FontAwesomeIcon icon={faFolder} className={"icon"} />
-                                        Browse
-                                    </label>
-                                    <input className={"file-browse input-group-addon"} type="text" value={this.state.exe}
-                                           placeholder={"Choose application"} onChange={this.onInputchange} />
-                                </form>
+                    <div className="box">
+                        <div>
+                            <form>
+                                <label className={"btn input-group-addon"}> <FontAwesomeIcon icon={faFolder} className={"icon"}/>
+                                    <input name={"exe"} type="file" value={this.state.value} onChange={this.onInputChange} accept={".exe"}/>
+                                    Browse
+                                </label>
+                                <input className={"file-browse input-group-addon"} type="text" value={this.state.exe}
+                                       placeholder={"Choose application"} onChange={this.onInputChange} disabled/>
+                            </form>
 
-                                <form>
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Vendor
-                                    </label>
-                                    <input className={"text input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"Microsoft"} onChange={this.onInputchange}/>
+                            <form>
+                                {/* Vendor field */}
+                                <label className={"field-label input-group-addon"}> Vendor </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"vendor"} className={"text input-group-addon"} type="text" value={this.state.vendor}
+                                       placeholder={"Microsoft"} onChange={this.onInputChange}/>
 
-                                {/*</form>*/}
-                                {/*<form>*/}
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Product
-                                    </label>
-                                    <input className={"text input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"Excel"} onChange={this.onInputchange}/>
+                                {/* Product field */}
+                                <label className={"field-label input-group-addon"}> Product </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"product"} className={"text input-group-addon"} type="text" value={this.state.product}
+                                       placeholder={"Excel"} onChange={this.onInputChange}/>
 
-                                {/*</form>*/}
-                                {/*<form>*/}
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Version number
-                                    </label>
-                                    <input className={"text input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"2016"} onChange={this.onInputchange}/>
-                                </form>
+                                {/* Version field */}
+                                <label className={"field-label input-group-addon"}> Version number </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"version"} className={"text input-group-addon"} type="text" value={this.state.version}
+                                       placeholder={"2016"} onChange={this.onInputChange}/>
 
-                                <form>
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Security
-                                    </label>
-                                    <input className={"percentage input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"20"} onChange={this.onInputchange}/>
+                            </form>
 
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Safety
-                                    </label>
-                                    <input className={"percentage input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"20"} onChange={this.onInputchange}/>
+                            <form>
 
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Resiliency
-                                    </label>
-                                    <input className={"percentage input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"20"} onChange={this.onInputchange}/>
+                                <label className={"field-label input-group-addon"}> Security </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"security"} className={"percentage input-group-addon"} type="number" value={this.state.security}
+                                       placeholder={"20"} onChange={this.onInputChange}/>
 
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Reliability
-                                    </label>
-                                    <input className={"percentage input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"20"} onChange={this.onInputchange}/>
 
-                                    <label className={"field-label input-group-addon"}>
-                                        <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputchange}/>
-                                        Availability
-                                    </label>
-                                    <input className={"percentage input-group-addon"} type="text" value={this.state.value}
-                                           placeholder={"20"} onChange={this.onInputchange}/>
-                                </form>
-                                <input type={"submit"} className={"btn input-group-addon"} onClick={this.onSubmitForm}/>
-                            </div>
+                                <label className={"field-label input-group-addon"}> Safety </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"safety"} className={"percentage input-group-addon"} type="number" value={this.state.safety}
+                                       placeholder={"20"} onChange={this.onInputChange}/>
+
+                                <label className={"field-label input-group-addon"}> Resiliency </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"resiliency"} className={"percentage input-group-addon"} type="number" value={this.state.resiliency}
+                                       placeholder={"20"} onChange={this.onInputChange}/>
+
+                                <label className={"field-label input-group-addon"}> Reliability </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"reliability"} className={"percentage input-group-addon"} type="number" value={this.state.reliability}
+                                       placeholder={"20"} onChange={this.onInputChange}/>
+
+                                <label className={"field-label input-group-addon"}> Availability </label>
+                                <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
+                                <input name={"availability"} className={"percentage input-group-addon"} type="number" value={this.state.availability}
+                                       placeholder={"20"} onChange={this.onInputChange}/>
+
+                            </form>
+                            <input type={"submit"} className={"btn input-group-addon"} onClick={this.onSubmitForm}/>
                         </div>
+                    </div>
                 </div>
             </div>
 
