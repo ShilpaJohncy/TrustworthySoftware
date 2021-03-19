@@ -32,4 +32,72 @@ public class AnalyserController {
         Gson gson = new Gson();
         return gson.toJson(response);
     }
+
+    @PostMapping(value = "/calculateSecurity")
+    public String getSecurity(@RequestBody AnalyserRequestObject requestObject) {
+
+        Product product = new Product();
+        product.setExecutablePath(requestObject.getExe());
+        product.setVendorName(requestObject.getVendor());
+        product.setProductName(requestObject.getProduct());
+        product.setVersionNo(requestObject.getVersion());
+        product.setSecurity(100);
+
+        AnalyserService service = new AnalyserService();
+        AnalyserResponseObject response = service.runSecurityTest(product);
+
+        Gson gson = new Gson();
+        return gson.toJson(response);
+    }
+
+    @PostMapping(value = "/calculateSafety")
+    public String getSafety(@RequestBody AnalyserRequestObject requestObject) {
+
+        Product product = new Product();
+        product.setExecutablePath(requestObject.getExe());
+        product.setVendorName(requestObject.getVendor());
+        product.setProductName(requestObject.getProduct());
+        product.setVersionNo(requestObject.getVersion());
+        product.setSafety(100);
+
+        AnalyserService service = new AnalyserService();
+        AnalyserResponseObject response = service.runSafetyTest(product);
+
+        Gson gson = new Gson();
+        return gson.toJson(response);
+    }
+
+    @PostMapping(value = "/calculateAvailability")
+    public String getAvailability(@RequestBody AnalyserRequestObject requestObject) {
+
+        Product product = new Product();
+        product.setExecutablePath(requestObject.getExe());
+        product.setVendorName(requestObject.getVendor());
+        product.setProductName(requestObject.getProduct());
+        product.setVersionNo(requestObject.getVersion());
+        product.setAvailability(100);
+
+        AnalyserService service = new AnalyserService();
+        AnalyserResponseObject response = service.runAvailabilityTest(product);
+
+        Gson gson = new Gson();
+        return gson.toJson(response);
+    }
+
+    @PostMapping(value = "/calculateResiliency")
+    public String getResiliency(@RequestBody AnalyserRequestObject requestObject) {
+
+        Product product = new Product();
+        product.setExecutablePath(requestObject.getExe());
+        product.setVendorName(requestObject.getVendor());
+        product.setProductName(requestObject.getProduct());
+        product.setVersionNo(requestObject.getVersion());
+        product.setResiliency(100);
+
+        AnalyserService service = new AnalyserService();
+        AnalyserResponseObject response = service.runResiliencyTest(product);
+
+        Gson gson = new Gson();
+        return gson.toJson(response);
+    }
 }

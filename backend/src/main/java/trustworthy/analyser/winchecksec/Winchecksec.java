@@ -24,7 +24,7 @@ public class Winchecksec {
     public static void getWinCheckSecScores(Product product) throws IOException, JSONException {
         if(!product.isRanWinchecksec()){
             Runtime rt = Runtime.getRuntime();
-            Process proc = rt.exec(WINCHECKSEC_EXE + " --json " + product.getExecutablePath() );
+            Process proc = rt.exec(WINCHECKSEC_EXE + " --json \"" + product.getExecutablePath() + "\"" );
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(proc.getInputStream()));
 
@@ -40,8 +40,9 @@ public class Winchecksec {
                 output = output.concat(s);
             }
             // Format response to rqd JSON format
-            output = output.substring(1, output.length() - 1);
-
+            if(!output.equals("")) {
+                output = output.substring(1, output.length() - 1);
+            }
             // Set the response to the response object
             JSONObject jsonResponse = new JSONObject(output);
             Gson gson = new GsonBuilder().create();

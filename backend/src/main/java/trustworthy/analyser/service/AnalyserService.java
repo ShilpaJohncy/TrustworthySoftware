@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import trustworthy.analyser.dataObjects.AnalyserResponseObject;
 import trustworthy.analyser.utils.Product;
 
-import static trustworthy.analyser.scoreCalculators.AvailabilityScore.runAvailabilityTest;
-import static trustworthy.analyser.scoreCalculators.ResiliencyScore.runResiliencyTest;
+import static trustworthy.analyser.scoreCalculators.AvailabilityScore.runAvailabilityTests;
+import static trustworthy.analyser.scoreCalculators.ResiliencyScore.runResiliencyTests;
 import static trustworthy.analyser.scoreCalculators.SafetyScore.runSafetyTests;
 import static trustworthy.analyser.scoreCalculators.SecurityScore.runSecurityTests;
 import static trustworthy.analyser.utils.Constants.*;
@@ -13,6 +13,11 @@ import static trustworthy.analyser.utils.Constants.*;
 @Service
 public class AnalyserService {
 
+    /**
+     * The service that will run all tests to determine overall trustworthiness
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the trustworthiness score and individual facet scores calculated
+     */
     public AnalyserResponseObject runTests(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         if(product.getSecurity() > 0){
@@ -22,10 +27,10 @@ public class AnalyserService {
             responseObject.setSafetyScore(runSafetyTests(product));
         }
         if(product.getResiliency() > 0){
-            responseObject.setResilienceScore(runResiliencyTest(product));
+            responseObject.setResilienceScore(runResiliencyTests(product));
         }
         if(product.getAvailability() > 0){
-            responseObject.setAvailabilityScore(runAvailabilityTest(product));
+            responseObject.setAvailabilityScore(runAvailabilityTests(product));
         }
         calculateVerdict(responseObject);
         return responseObject;
@@ -49,5 +54,28 @@ public class AnalyserService {
         }else if (trustworthyScore >= 80) {
             responseObject.setVerdict(VERY_HIGH);
         }
+    }
+
+    public AnalyserResponseObject runSecurityTest(Product product){
+        AnalyserResponseObject responseObject = new AnalyserResponseObject();
+        responseObject.setSecurityScore(runSecurityTests(product));
+        return responseObject;
+    }
+    public AnalyserResponseObject runSafetyTest(Product product){
+        AnalyserResponseObject responseObject = new AnalyserResponseObject();
+        responseObject.setSafetyScore(runSafetyTests(product));
+        return responseObject;
+    }
+
+    public AnalyserResponseObject runAvailabilityTest(Product product){
+        AnalyserResponseObject responseObject = new AnalyserResponseObject();
+        responseObject.setAvailabilityScore(runAvailabilityTests(product));
+        return responseObject;
+    }
+
+    public AnalyserResponseObject runResiliencyTest(Product product){
+        AnalyserResponseObject responseObject = new AnalyserResponseObject();
+        responseObject.setResilienceScore(runResiliencyTests(product));
+        return responseObject;
     }
 }

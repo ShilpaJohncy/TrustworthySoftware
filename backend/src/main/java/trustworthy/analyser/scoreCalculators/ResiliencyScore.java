@@ -14,7 +14,7 @@ public class ResiliencyScore {
      * @param product - The application who's safety is to be determined
      */
     //TODO: To deal with the winchecksec score of -1.
-    public static double runResiliencyTest(Product product){
+    public static double runResiliencyTests(Product product){
         double resiliencyScore = 0;
         int winchecksecScore = getWeightedWinchecksecScores(product);
         resiliencyScore = winchecksecScore;

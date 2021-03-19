@@ -20,7 +20,7 @@ public class AvailabilityScore {
      * @param product - The product who's availability is to be tested
      * @return availabilityScore - The availability score based on weightage
      */
-    public static double runAvailabilityTest(Product product) {
+    public static double runAvailabilityTests(Product product) {
         double availabilityScore = 0;
         int successfulRuns;
         if(!product.isParallelize()){

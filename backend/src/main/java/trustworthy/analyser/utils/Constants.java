@@ -16,7 +16,7 @@ public final class Constants {
     public static final String MANALYZER_URL = "https://manalyzer.org";
 
     // The executables
-    public static final String WINCHECKSEC_EXE = "src/main/resources/winchecksec/winchecksec.exe";
+    public static final String WINCHECKSEC_EXE = "backend/src/main/resources/winchecksec/winchecksec.exe";
 
     public static final int NO_OF_TRIES = 5;
     public static final long NAIVE_TIMEOUT = 1000L;
