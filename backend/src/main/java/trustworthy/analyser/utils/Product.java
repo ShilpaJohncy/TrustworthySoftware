@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static trustworthy.analyser.utils.Constants.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,6 +19,11 @@ public class Product {
     private boolean checkNaive = true;
 
     private boolean ranWinchecksec = false;
+    private int security = SECURITY_WEIGHTAGE;
+    private int safety = SAFETY_WEIGHTAGE;
+    private int availability = AVAILABILITY_WEIGHTAGE;
+    private int resiliency = RESILIENCE_WEIGHTAGE;
+    private int reliability = RELIABILITY_WEIGHTAGE;
 
     private double cvssScore;
     private double manalyzeScore;
@@ -33,12 +40,5 @@ public class Product {
     private boolean gs;
     private boolean authenticode;
     private boolean dotNET;
-
-    private double securityScore;
-    private double safetyScore;
-    private double availabilityScore;
-    private double resilienceScore;
-    private double trustworthyScore;
-    private String verdict;
 
 }

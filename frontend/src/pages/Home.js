@@ -63,28 +63,28 @@ class Home extends React.Component {
 
                                 <label className={"field-label input-group-addon"}> Security </label>
                                 <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
-                                <input name={"security"} className={"percentage input-group-addon"} type="number" value={this.state.security}
+                                <input name={"security"} className={"percentage input-group-addon"} type="number" min={0} max={100} value={this.state.security}
                                        placeholder={"20"} onChange={this.onInputChange}/>
 
 
                                 <label className={"field-label input-group-addon"}> Safety </label>
                                 <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
-                                <input name={"safety"} className={"percentage input-group-addon"} type="number" value={this.state.safety}
+                                <input name={"safety"} className={"percentage input-group-addon"} type="number" min={0} max={100}  value={this.state.safety}
                                        placeholder={"20"} onChange={this.onInputChange}/>
 
                                 <label className={"field-label input-group-addon"}> Resiliency </label>
                                 <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
-                                <input name={"resiliency"} className={"percentage input-group-addon"} type="number" value={this.state.resiliency}
+                                <input name={"resiliency"} className={"percentage input-group-addon"} type="number" min={0} max={100} value={this.state.resiliency}
                                        placeholder={"20"} onChange={this.onInputChange}/>
 
                                 <label className={"field-label input-group-addon"}> Reliability </label>
                                 <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
-                                <input name={"reliability"} className={"percentage input-group-addon"} type="number" value={this.state.reliability}
+                                <input name={"reliability"} className={"percentage input-group-addon"} type="number"min={0} max={100}  value={this.state.reliability}
                                        placeholder={"20"} onChange={this.onInputChange}/>
 
                                 <label className={"field-label input-group-addon"}> Availability </label>
                                 <input type={"fieldLabel"} value={this.state.value} onChange={this.onInputChange}/>
-                                <input name={"availability"} className={"percentage input-group-addon"} type="number" value={this.state.availability}
+                                <input name={"availability"} className={"percentage input-group-addon"} type="number" min={0} max={100} value={this.state.availability}
                                        placeholder={"20"} onChange={this.onInputChange}/>
 
                             </form>
