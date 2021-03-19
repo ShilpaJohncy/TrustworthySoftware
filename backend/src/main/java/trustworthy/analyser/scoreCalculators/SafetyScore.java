@@ -22,7 +22,7 @@ public class SafetyScore {
         safetyScore = product.getManalyzeScore() + winchecksecScore;
         safetyScore = safetyScore/100;
         safetyScore *= product.getSafety();
-        return (safetyScore);
+        return (Math.round( safetyScore * 100.0 ) / 100.0);
     }
 
     /**

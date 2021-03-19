@@ -49,7 +49,8 @@ public class AvailabilityScore {
         else{
             availabilityScore = 0;
         }
-        return(availabilityScore * product.getAvailability() / 3);
+        availabilityScore = availabilityScore * product.getAvailability() / 3;
+        return(Math.round( availabilityScore * 100.0 ) / 100.0);
     }
 
     /**

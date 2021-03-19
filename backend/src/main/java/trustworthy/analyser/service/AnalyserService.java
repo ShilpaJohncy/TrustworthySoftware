@@ -41,7 +41,8 @@ public class AnalyserService {
      * @param responseObject - The product's whose trustworthiness is being decided.
      */
     private static void calculateVerdict(AnalyserResponseObject responseObject) {
-        double trustworthyScore = responseObject.getSecurityScore() + responseObject.getAvailabilityScore() + responseObject.getSafetyScore() + responseObject.getResilienceScore();
+        double sum = responseObject.getSecurityScore() + responseObject.getAvailabilityScore() + responseObject.getSafetyScore() + responseObject.getResilienceScore();
+        int trustworthyScore = (int) Math.rint(sum);
         responseObject.setTrustworthyScore(trustworthyScore);
         if (trustworthyScore < 20) {
             responseObject.setVerdict(VERY_LOW);
@@ -56,23 +57,44 @@ public class AnalyserService {
         }
     }
 
+    /**
+     * The service that will run tests to determine if the software is secure
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the security score calculated
+     */
     public AnalyserResponseObject runSecurityTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         responseObject.setSecurityScore(runSecurityTests(product));
         return responseObject;
     }
+
+    /**
+     * The service that will run tests to determine if the software is safe
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the safety score calculated
+     */
     public AnalyserResponseObject runSafetyTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         responseObject.setSafetyScore(runSafetyTests(product));
         return responseObject;
     }
 
+    /**
+     * The service that will run tests to determine if the software is available
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the availability score calculated
+     */
     public AnalyserResponseObject runAvailabilityTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         responseObject.setAvailabilityScore(runAvailabilityTests(product));
         return responseObject;
     }
 
+    /**
+     * The service that will run tests to determine if the software is resilient
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the resiliency score calculated
+     */
     public AnalyserResponseObject runResiliencyTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         responseObject.setResilienceScore(runResiliencyTests(product));

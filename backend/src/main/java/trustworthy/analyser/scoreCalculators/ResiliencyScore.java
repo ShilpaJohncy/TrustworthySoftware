@@ -20,7 +20,7 @@ public class ResiliencyScore {
         resiliencyScore = winchecksecScore;
         resiliencyScore = resiliencyScore/20;
         resiliencyScore *= product.getResiliency();
-        return(resiliencyScore);
+        return(Math.round( resiliencyScore * 100.0 ) / 100.0);
     }
 
     /**

@@ -14,8 +14,6 @@ public final class Constants {
     public static final String NVD_SEARCH_POSTFIX = "/products/cpe/search?";
     public static final String CPE_PREFIX = "cpe:2.3:a:";
     public static final String MANALYZER_URL = "https://manalyzer.org";
-
-    // The executables
     public static final String WINCHECKSEC_EXE = "backend/src/main/resources/winchecksec/winchecksec.exe";
 
     public static final int NO_OF_TRIES = 5;
@@ -41,6 +39,7 @@ public final class Constants {
     public static final String INCONCLUSIVE = "Data gathered on the product is inconclusive";
     public static final String LOW = "Not trustworthy ";
     public static final String VERY_LOW = "Really not trustworthy";
+
 
 
 }

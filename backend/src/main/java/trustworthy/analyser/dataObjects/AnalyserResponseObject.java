@@ -11,6 +11,6 @@ public class AnalyserResponseObject {
     private double availabilityScore;
     private double resilienceScore;
     private double reliabilityScore;
-    private double trustworthyScore;
+    private int trustworthyScore;
     private String verdict;
 }

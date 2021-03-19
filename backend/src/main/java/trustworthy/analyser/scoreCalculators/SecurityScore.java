@@ -21,7 +21,7 @@ public class SecurityScore {
         securityScore = cvssScore + wincheckScore;
         securityScore = securityScore/100;
         securityScore *= product.getSecurity();
-        return (securityScore);
+        return (Math.round( securityScore * 100.0 ) / 100.0);
     }
 
     /**
