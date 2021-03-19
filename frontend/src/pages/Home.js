@@ -3,24 +3,42 @@ import {faFolder} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Home extends React.Component {
-    constructor() {
-        super();
-        this.state = {};
+    constructor(props) {
+        super(props);
+        this.state = {
+            vendor:'',
+            product:'',
+            version:'',
+            exe:'',
+            safety:'',
+            security:'',
+            availability:'',
+            resiliency:'',
+            reliability:''
+        };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
     onInputChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]:event.target.value
         });
     }
 
-    onSubmitForm() {
-        console.log(this.state.vendor);
-        alert(this.state.vendor);
-    }
+    async onSubmitForm(event) {
+        const object = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.state)
+        }
 
+        const response = await fetch('submit', object);
+        await response.json().then(data =>
+            alert("Verdict " + JSON.stringify(data))
+        )
+        event.preventDefault();
+    }
 
     render() {
         return (
@@ -31,11 +49,11 @@ class Home extends React.Component {
                         <div>
                             <form>
                                 <label className={"btn input-group-addon"}> <FontAwesomeIcon icon={faFolder} className={"icon"}/>
-                                    <input name={"exe"} type="file" value={this.state.value} onChange={this.onInputChange} accept={".exe"}/>
+                                    <input type="file" value={this.state.value} onChange={this.onInputChange} accept={".exe"}/>
                                     Browse
                                 </label>
-                                <input className={"file-browse input-group-addon"} type="text" value={this.state.exe}
-                                       placeholder={"Choose application"} onChange={this.onInputChange} disabled/>
+                                <input name={"exe"} className={"file-browse input-group-addon"} type="text" value={this.state.value}
+                                       placeholder={"Choose application"} onChange={this.onInputChange}/>
                             </form>
 
                             <form>
