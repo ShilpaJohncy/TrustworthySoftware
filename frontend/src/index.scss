@@ -1,0 +1,184 @@
+.bg {
+  //background-image: linear-gradient(to top right, whitesmoke, #116466  );
+  //background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite); The good oneee till now
+  background-image: linear-gradient(to right, #1e7a7c, #77c9d4, #57BC90);
+  //background-image: linear-gradient(to right, #77C9D4, #57BC90);
+  //background-image: linear-gradient(to top, #E9B000, floralwhite);
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  font-size: 50px;
+  letter-spacing: 1px;
+}
+
+.contents {
+  margin-top: 300px;
+  overflow: auto;
+  text-align: center;
+  position: relative;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.box {
+  padding: 30px;
+  //background: #77c9d4,;
+  display: flex;
+  border: 3px solid;
+  //border-left: 7px solid grey;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group-addon {
+  padding: 6px;
+  font-size: 16px;
+  border: 1px solid #100f0f;
+  display: inline-block;
+  margin-bottom: 0;
+  line-height: 1.42857143;
+  text-align: center;
+  position: relative;
+  margin-top: 4%;
+}
+
+.text {
+  max-width: 135px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: left;
+  margin-right: 25px;
+}
+
+.file-browse {
+  min-width: 450px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: left;
+  margin-right: 25px;
+}
+
+.percentage {
+  max-width: 45px;
+  color: #0a0a0a;
+  background-color: floralwhite;
+  text-align: center;
+  margin-right: 15px;
+}
+
+input:placeholder-shown {
+  font-style: italic;
+  opacity: 0.5;
+  background-color: white;
+  text-align: left;
+}
+
+.btn {
+  position: relative;
+  text-align: center;
+  background-color: grey;
+  color: floralwhite;
+  min-width: 100px;
+}
+
+.field-label {
+  position: relative;
+  text-align: center;
+  background-color: #0f5f58;
+  color: floralwhite;
+  min-width: 100px;
+  font-size: 16px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.icon {
+  padding-right: 3px;
+}
+
+.qmark {
+  padding-left: 3px;
+  font-size: 12px;
+}
+
+.popup {
+  borderRadius: 0;
+  height: 10px;
+  padding: 1em;
+  color: black;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans", "SansSerif";
+  //background-color: floralwhite;
+  //background-image: linear-gradient(to bottom, white, floralwhite, #83ddd2, #5fddcd);
+  //background-image: linear-gradient(to top, white, floralwhite, #83ddd2, #5fddcd);
+
+}
+
+.navbar {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 50px;
+  top: 0px;
+  position: relative;
+  z-index: 1000;
+  text-align: right;
+  display: inline-block;
+  border-bottom-style: wave;
+  border-bottom-width: 0.5px;
+  border-bottom-color: whitesmoke;
+}
+
+.navbar a {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+  letter-spacing: 1px;
+  position: relative;
+  margin-top: 15px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.navbar a text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.navbar a.active {
+  color: floralwhite;
+}
+
+.container {
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
