@@ -1,7 +1,7 @@
-.bg{
+.bg {
   //background-image: linear-gradient(to top right, whitesmoke, #116466  );
   //background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite); The good oneee till now
-  background-image: linear-gradient(to right,  #1e7a7c,  #77c9d4,#57BC90);
+  background-image: linear-gradient(to right, #1e7a7c, #77c9d4, #57BC90);
   //background-image: linear-gradient(to right, #77C9D4, #57BC90);
   //background-image: linear-gradient(to top, #E9B000, floralwhite);
   position: fixed;
@@ -9,7 +9,7 @@
   min-height: 100%;
 }
 
-h1{
+h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 500;
   text-decoration: none;
@@ -29,7 +29,7 @@ h1{
 
 }
 
-.wrapper{
+.wrapper {
   height: 100%;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@ h1{
   margin-top: 4%;
 }
 
-.text{
+.text {
   max-width: 135px;
   color: #0a0a0a;
   background-color: floralwhite;
@@ -67,7 +67,7 @@ h1{
   margin-right: 25px;
 }
 
-.file-browse{
+.file-browse {
   min-width: 450px;
   color: #0a0a0a;
   background-color: floralwhite;
@@ -75,7 +75,7 @@ h1{
   margin-right: 25px;
 }
 
-.percentage{
+.percentage {
   max-width: 45px;
   color: #0a0a0a;
   background-color: floralwhite;
@@ -101,17 +101,30 @@ input:placeholder-shown {
 .field-label {
   position: relative;
   text-align: center;
-  background-color: #0c0c0c;
+  background-color: #0f5f58;
   color: floralwhite;
   min-width: 100px;
+  font-size: 16px;
 }
 
-input[type="file"],  input[type="fieldLabel"] {
+input[type="file"] {
   display: none;
 }
 
-.icon{
-  padding-right: 5px;
+.icon {
+  padding-right: 3px;
+}
+
+.qmark {
+  padding-left: 3px;
+  font-size: 12px;
+}
+
+.popup {
+  borderRadius: 0;
+  height: 10px;
+  padding: 1em;
+  color: black;
 }
 
 body {
