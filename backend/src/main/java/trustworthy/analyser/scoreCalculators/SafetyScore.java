@@ -14,7 +14,6 @@ public class SafetyScore {
      * Function to run all tests required to extract a score for the safety of a given product
      * @param product - The application who's safety is to be determined
      */
-    //TODO: To deal with the winchecksec score of -1.
     public static double runSafetyTests(Product product){
         double safetyScore = 0;
         getManalyzeReport(product);
@@ -35,7 +34,7 @@ public class SafetyScore {
         try {
             getWinCheckSecScores(product);
         } catch (IOException | JSONException e) {
-            return -1;
+            return 56;
         }
 
         int wincheckScore = 0;

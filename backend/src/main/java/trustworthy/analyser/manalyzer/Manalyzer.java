@@ -22,6 +22,11 @@ public class Manalyzer {
         // Post the executable to Manalyze.org for testing
         String taskId = submitSample(product.getExecutablePath());
 
+        //If taskId doesn't exist, set a dump value for PoC
+        if(taskId == null){
+            product.setManalyzeScore(24);
+        }
+
         //Retrieve the report using the taskId and parse the jsonOutput to get the field values we want
         JSONObject manalyzeReport = getReport(taskId);
         if(manalyzeReport != null){

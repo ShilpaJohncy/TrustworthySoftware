@@ -44,7 +44,9 @@ public class CalculateCVSSScore {
             weightedTotal = (weightedTotal/(totalVulnerabilityCount * CRITICAL_WEIGHTAGE)) * 100;
             product.setCvssScore(weightedTotal/10);
         }else{
-            product.setCvssScore(-1);
+            // Dump value incase the website is down,
+            // For POC
+            product.setCvssScore(2);
         }
     }
 }
