@@ -1,6 +1,10 @@
 package trustworthy.analyser.controller;
 
 import com.google.gson.Gson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +14,7 @@ import trustworthy.analyser.dataObjects.AnalyserResponseObject;
 import trustworthy.analyser.service.AnalyserService;
 import trustworthy.analyser.utils.Product;
 
+@Api(value = "Analyser Controller", description = "Get a verdict on the trustworthiness of a software.")
 @RestController
 public class AnalyserController {
 
@@ -18,6 +23,7 @@ public class AnalyserController {
      * @param requestObject - An object of the type AnalyserRequestObject
      * @return AnalyserResponseObject with the scores for each facet and the overall verdict set.
      */
+    @ApiOperation(value = "Get the trustworthiness verdict of the software")
     @PostMapping(value = "/submit", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public String submitProduct(@RequestBody AnalyserRequestObject requestObject) {
 
@@ -44,6 +50,7 @@ public class AnalyserController {
      * @param requestObject - An object of the type AnalyserRequestObject
      * @return The security score
      */
+    @ApiOperation(value = "Calculate the security score out of 100")
     @PostMapping(value = "/calculateSecurity")
     public String getSecurity(@RequestBody AnalyserRequestObject requestObject) {
 
@@ -67,6 +74,7 @@ public class AnalyserController {
      * @return The safety score
      */
     //TODO: Return the safety verdict with the score
+    @ApiOperation(value = "Calculate the safety score out of 100")
     @PostMapping(value = "/calculateSafety")
     public String getSafety(@RequestBody AnalyserRequestObject requestObject) {
 
@@ -89,6 +97,7 @@ public class AnalyserController {
      * @param requestObject - An object of the type AnalyserRequestObject
      * @return The availability score
      */
+    @ApiOperation(value = "Calculate the availability score out of 100")
     @PostMapping(value = "/calculateAvailability")
     public String getAvailability(@RequestBody AnalyserRequestObject requestObject) {
 
@@ -111,6 +120,7 @@ public class AnalyserController {
      * @param requestObject - An object of the type AnalyserRequestObject
      * @return The resiliency score
      */
+    @ApiOperation(value = "Calculate the resiliency score out of 100")
     @PostMapping(value = "/calculateResiliency")
     public String getResiliency(@RequestBody AnalyserRequestObject requestObject) {
 
