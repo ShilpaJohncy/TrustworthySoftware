@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import {faFolder, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Popup} from "semantic-ui-react"
+import Result from "./Result";
 
 let total = 0;
 
@@ -31,11 +32,14 @@ function ifSmallerSum() {
     return true;
 }
 
-class Home extends React.Component {
+class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            redirect: null,
+            data: []
+        };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         this.setPercentage = this.setPercentage.bind(this);
@@ -52,6 +56,7 @@ class Home extends React.Component {
             [event.target.id]:event.target.value
         });
     }
+
     async onSubmitForm(event) {
         if (ifSmallerSum()) {
             const object = {
@@ -60,15 +65,19 @@ class Home extends React.Component {
                 body: JSON.stringify(this.state)
             }
 
-            const response = await fetch('submit', object);
-            await response.json().then(data =>
-                alert("Verdict " + JSON.stringify(data))
+            await fetch('submit', object).then((response) => {response.json().then(
+                data => {
+                this.setState({ redirect: "/Verdict", data: JSON.stringify(data)});}
             )
+            });
+            event.preventDefault();
         }
-        event.preventDefault();
     }
 
     render() {
+        if (this.state.redirect) {
+             return <Result path="/Verdict" message={(this.state.data) } />
+        }
         return (
             <div className="contents">
                 <h1>Trustworthy Analyser</h1>

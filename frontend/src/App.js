@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import {Link} from "react-router-dom";
+import Result from "./pages/Result";
 
 const App = () => {
     const [currCount, setCurrCount] = React.useState(0);
@@ -45,6 +46,9 @@ const App = () => {
                             </Route>
                             <Route path="/About">
                                 <About />
+                            </Route>
+                            <Route path="/Verdict">
+                                <Result />
                             </Route>
                         </Switch>
                     </div>
