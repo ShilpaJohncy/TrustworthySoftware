@@ -1,4 +1,4 @@
-package trustworthy.analyser.dataObjects;
+package trustworthy.analyser.data;
 
 import lombok.Getter;
 import lombok.Setter;

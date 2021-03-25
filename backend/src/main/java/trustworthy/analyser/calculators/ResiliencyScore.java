@@ -1,11 +1,11 @@
-package trustworthy.analyser.scoreCalculators;
+package trustworthy.analyser.calculators;
 
 import org.json.JSONException;
 import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.helper.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class ResiliencyScore {
 

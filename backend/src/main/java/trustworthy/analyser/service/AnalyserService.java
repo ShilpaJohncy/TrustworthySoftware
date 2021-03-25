@@ -1,13 +1,13 @@
 package trustworthy.analyser.service;
 
 import org.springframework.stereotype.Service;
-import trustworthy.analyser.dataObjects.AnalyserResponseObject;
+import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.utils.Product;
 
-import static trustworthy.analyser.scoreCalculators.AvailabilityScore.runAvailabilityTests;
-import static trustworthy.analyser.scoreCalculators.ResiliencyScore.runResiliencyTests;
-import static trustworthy.analyser.scoreCalculators.SafetyScore.runSafetyTests;
-import static trustworthy.analyser.scoreCalculators.SecurityScore.runSecurityTests;
+import static trustworthy.analyser.calculators.AvailabilityScore.runAvailabilityTests;
+import static trustworthy.analyser.calculators.ResiliencyScore.runResiliencyTests;
+import static trustworthy.analyser.calculators.SafetyScore.runSafetyTests;
+import static trustworthy.analyser.calculators.SecurityScore.runSecurityTests;
 import static trustworthy.analyser.utils.Constants.*;
 
 @Service

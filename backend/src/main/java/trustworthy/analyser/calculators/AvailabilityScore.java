@@ -1,4 +1,4 @@
-package trustworthy.analyser.scoreCalculators;
+package trustworthy.analyser.calculators;
 
 import trustworthy.analyser.utils.Product;
 

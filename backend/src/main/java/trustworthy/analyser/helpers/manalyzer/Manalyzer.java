@@ -1,4 +1,4 @@
-package trustworthy.analyser.helper.manalyzer;
+package trustworthy.analyser.helpers.manalyzer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,8 +7,8 @@ import trustworthy.analyser.utils.Product;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static trustworthy.analyser.helper.manalyzer.ManalyzerAPI.getReport;
-import static trustworthy.analyser.helper.manalyzer.ManalyzerAPI.submitSample;
+import static trustworthy.analyser.helpers.manalyzer.ManalyzerAPI.getReport;
+import static trustworthy.analyser.helpers.manalyzer.ManalyzerAPI.submitSample;
 
 public class Manalyzer {
 

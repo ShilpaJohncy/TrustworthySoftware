@@ -7,8 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import trustworthy.analyser.dataObjects.AnalyserRequestObject;
-import trustworthy.analyser.dataObjects.AnalyserResponseObject;
+import trustworthy.analyser.data.AnalyserRequestObject;
+import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.service.AnalyserService;
 import trustworthy.analyser.utils.Product;
 
