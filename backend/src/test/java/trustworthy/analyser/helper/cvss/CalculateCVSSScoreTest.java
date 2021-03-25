@@ -1,11 +1,11 @@
-package trustworthy.analyser.cvss;
+package trustworthy.analyser.helper.cvss;
 
 import trustworthy.analyser.utils.Product;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import static trustworthy.analyser.cvss.CalculateCVSSScore.calculateCVSSScore;
+import static trustworthy.analyser.helper.cvss.CalculateCVSSScore.calculateCVSSScore;
 import static trustworthy.analyser.utils.Constants.ZOOM_EXE;
 
 /**

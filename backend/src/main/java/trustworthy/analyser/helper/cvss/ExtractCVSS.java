@@ -1,4 +1,4 @@
-package trustworthy.analyser.cvss;
+package trustworthy.analyser.helper.cvss;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

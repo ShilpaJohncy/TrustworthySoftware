@@ -5,8 +5,8 @@ import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.manalyzer.Manalyzer.getManalyzeReport;
-import static trustworthy.analyser.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helper.manalyzer.Manalyzer.getManalyzeReport;
+import static trustworthy.analyser.helper.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class SafetyScore {
 

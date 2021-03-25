@@ -5,8 +5,8 @@ import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.cvss.CalculateCVSSScore.calculateCVSSScore;
-import static trustworthy.analyser.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helper.cvss.CalculateCVSSScore.calculateCVSSScore;
+import static trustworthy.analyser.helper.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class SecurityScore {
     /**

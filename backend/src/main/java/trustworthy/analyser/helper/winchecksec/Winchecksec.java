@@ -1,4 +1,4 @@
-package trustworthy.analyser.winchecksec;
+package trustworthy.analyser.helper.winchecksec;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package trustworthy.analyser.manalyzer;
+package trustworthy.analyser.helper.manalyzer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

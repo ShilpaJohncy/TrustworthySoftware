@@ -1,12 +1,12 @@
-package trustworthy.analyser.cvss;
+package trustworthy.analyser.helper.cvss;
 
 import trustworthy.analyser.utils.Product;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static trustworthy.analyser.cvss.CVSSSeverity.*;
-import static trustworthy.analyser.cvss.ExtractCVSS.extractCVSSScore;
+import static trustworthy.analyser.helper.cvss.CVSSSeverity.*;
+import static trustworthy.analyser.helper.cvss.ExtractCVSS.extractCVSSScore;
 import static trustworthy.analyser.utils.Constants.*;
 
 public class CalculateCVSSScore {
