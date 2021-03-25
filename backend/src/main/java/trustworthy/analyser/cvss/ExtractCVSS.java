@@ -75,7 +75,7 @@ public class ExtractCVSS {
 
             // Extracting the links to the CVEs page from the search results
             // If version number is not provided, get the CVSS score for the latest available product version
-            if(versionNo.isEmpty()) {
+            if(versionNo == null || versionNo.isEmpty()) {
                 Document parsedSearchResult = searchResults.parse();
                 Element lastPage = parsedSearchResult.select("ul.pagination > li > a").last();
 

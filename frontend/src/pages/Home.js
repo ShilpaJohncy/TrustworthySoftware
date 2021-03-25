@@ -1,7 +1,8 @@
-import React from "react";
-import {faFolder, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import React, {Component} from "react";
+import {faFolder, faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Popup} from "semantic-ui-react"
+import Result from "./Result";
 
 let total = 0;
 
@@ -23,25 +24,30 @@ function findTotal() {
 
 function ifSmallerSum() {
     let arr = document.getElementsByName('percentage');
-    if (total < 100 && (arr[4].value > 0)) {
-        alert("Please make sure numbers total 100");
-        arr[4].value = null;
+    if (total < 100 && total > 0) {
+        if(arr[arr.length - 1].value > 0){
+            arr[arr.length - 1].value = null;
+        }
+        alert("Please make sure weightages total 100");
         return false;
     }
     return true;
 }
 
-class Home extends React.Component {
+class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            redirect: null,
+            data: []
+        };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         this.setPercentage = this.setPercentage.bind(this);
     }
 
-    onInputChange(event) {
+    async onInputChange(event) {
         this.setState({
             [event.target.name]:event.target.value
         });
@@ -52,23 +58,44 @@ class Home extends React.Component {
             [event.target.id]:event.target.value
         });
     }
+
     async onSubmitForm(event) {
-        if (ifSmallerSum()) {
+        let val = true;
+        let fieldNames = "";
+        if(!this.state.vendor){
+            fieldNames += " Vendor name;"
+        }
+        if(!this.state.product){
+            fieldNames += " Product name; "
+        }
+        if(!this.state.exe){
+            fieldNames += " Application; "
+        }
+
+        if (!this.state.vendor || !this.state.product || !this.state.exe) {
+            alert('Please enter required fields : ' + fieldNames );
+            val = false;
+        }
+        if (ifSmallerSum() && val) {
             const object = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.state)
             }
 
-            const response = await fetch('submit', object);
-            await response.json().then(data =>
-                alert("Verdict " + JSON.stringify(data))
+            await fetch('submit', object).then((response) => {response.json().then(
+                data => {
+                this.setState({ redirect: "/Verdict", data: JSON.stringify(data)});}
             )
+            });
+            event.preventDefault();
         }
-        event.preventDefault();
     }
 
     render() {
+        if (this.state.redirect) {
+             return <Result path="/Verdict" message={(this.state.data) } />
+        }
         return (
             <div className="contents">
                 <h1>Trustworthy Analyser</h1>
@@ -80,6 +107,7 @@ class Home extends React.Component {
                                     <input name={"exe"} type="file" value={this.state.value}
                                            onChange={this.onInputChange} accept={".exe"}/>
                                     Browse
+                                    <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                 </label>
                                 <input name={"exe"} className={"file-browse input-group-addon"} type="text"
                                        value={this.state.exe}
@@ -92,6 +120,7 @@ class Home extends React.Component {
                                 <Popup content='Name of the company selling the software'
                                        trigger={<label className={"field-label input-group-addon"}> Vendor
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                           <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                        </label>}
                                        className={"popup"}
                                        mouseEnterDelay={1000}
@@ -104,13 +133,14 @@ class Home extends React.Component {
                                 <Popup content='Name of the software/application to be tested'
                                        trigger={<label className={"field-label input-group-addon"}> Product
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                           <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                        </label>}
                                        className={"popup"}
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
                                 <input name={"product"} className={"text input-group-addon"} type="text"
                                        value={this.state.product}
-                                       placeholder={"Excel"} onChange={this.onInputChange}/>
+                                       placeholder={"Excel"} onChange={this.onInputChange} />
 
                                 {/* Version field */}
                                 <Popup content='The version no. of the application, if known.'

@@ -3,8 +3,6 @@ package trustworthy.analyser.controller;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +11,8 @@ import trustworthy.analyser.dataObjects.AnalyserRequestObject;
 import trustworthy.analyser.dataObjects.AnalyserResponseObject;
 import trustworthy.analyser.service.AnalyserService;
 import trustworthy.analyser.utils.Product;
+
+import static trustworthy.analyser.utils.Constants.*;
 
 @Api(value = "Analyser Controller", description = "Get a verdict on the trustworthiness of a software.")
 @RestController
@@ -32,11 +32,20 @@ public class AnalyserController {
         product.setVendorName(requestObject.getVendor());
         product.setProductName(requestObject.getProduct());
         product.setVersionNo(requestObject.getVersion());
-        product.setSecurity(requestObject.getSecurity());
-        product.setSafety(requestObject.getSafety());
-        product.setAvailability(requestObject.getAvailability());
-        product.setReliability(requestObject.getReliability());
-        product.setResiliency(requestObject.getResiliency());
+        if(requestObject.getSecurity() + requestObject.getSafety() + requestObject.getAvailability() + requestObject.getReliability() + requestObject.getResiliency() == 0 ){
+            product.setSecurity(SECURITY_WEIGHTAGE);
+            product.setSafety(SAFETY_WEIGHTAGE);
+            product.setAvailability(AVAILABILITY_WEIGHTAGE);
+            product.setReliability(RELIABILITY_WEIGHTAGE);
+            product.setResiliency(RESILIENCE_WEIGHTAGE);
+        }else{
+            product.setSecurity(requestObject.getSecurity());
+            product.setSafety(requestObject.getSecurity());
+            product.setAvailability(requestObject.getSecurity());
+            product.setReliability(requestObject.getSecurity());
+            product.setResiliency(requestObject.getSecurity());
+        }
+
 
         AnalyserService service = new AnalyserService();
         AnalyserResponseObject response = service.runTests(product);

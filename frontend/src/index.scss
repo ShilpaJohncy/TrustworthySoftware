@@ -1,7 +1,8 @@
 .bg {
   //background-image: linear-gradient(to top right, whitesmoke, #116466  );
-  //background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite); The good oneee till now
-  background-image: linear-gradient(to right, #1e7a7c, #77c9d4, #57BC90);
+  background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite);
+  //background-image: linear-gradient(to right, #210441, #2b106b, #501ea0, #5c3bab);
+  //background-image: linear-gradient(to right, #1e7a7c, #77c9d4, #57BC90);
   //background-image: linear-gradient(to right, #77C9D4, #57BC90);
   //background-image: linear-gradient(to top, #E9B000, floralwhite);
   position: fixed;
@@ -66,6 +67,13 @@ h1 {
   text-align: left;
   margin-right: 25px;
 }
+.verdict{
+  //max-width: 135px;
+  color: #0a0a0a;
+  background-color: #fffaf0;
+  text-align: center;
+  margin-right: 25px;
+}
 
 .file-browse {
   min-width: 450px;
@@ -118,6 +126,13 @@ input[type="file"] {
 .qmark {
   padding-left: 3px;
   font-size: 12px;
+}
+
+.asterix {
+  padding-left: 3px;
+  font-size: 8px;
+  margin-bottom: 5px;
+  color: floralwhite;
 }
 
 .popup {
@@ -174,7 +189,7 @@ body {
 }
 
 .navbar a.active {
-  color: floralwhite;
+  color: #09beae;
 }
 
 .container {
