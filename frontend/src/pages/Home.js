@@ -34,13 +34,6 @@ function ifSmallerSum() {
     return true;
 }
 
-const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
-
 class Home extends Component {
 
     constructor(props) {
@@ -55,16 +48,6 @@ class Home extends Component {
     }
 
     async onInputChange(event) {
-        // if(event.target.name === "exe"){
-        //     this.setState({
-        //         [event.target.name]:await toBase64(event.target.value)
-        //     });
-        // }
-        // else{
-        //     this.setState({
-        //         [event.target.name]:event.target.value
-        //     });
-        // }
         this.setState({
             [event.target.name]:event.target.value
         });
@@ -144,7 +127,7 @@ class Home extends Component {
                                        mouseLeaveDelay={500}/>
                                 <input name={"vendor"} className={"text input-group-addon"} type="text"
                                        value={this.state.vendor}
-                                       placeholder={"Microsoft"} onChange={this.onInputChange} required={true}/>
+                                       placeholder={"Microsoft"} onChange={this.onInputChange}/>
 
                                 {/* Product field */}
                                 <Popup content='Name of the software/application to be tested'
@@ -157,7 +140,7 @@ class Home extends Component {
                                        mouseLeaveDelay={500}/>
                                 <input name={"product"} className={"text input-group-addon"} type="text"
                                        value={this.state.product}
-                                       placeholder={"Excel"} onChange={this.onInputChange} required/>
+                                       placeholder={"Excel"} onChange={this.onInputChange} />
 
                                 {/* Version field */}
                                 <Popup content='The version no. of the application, if known.'
