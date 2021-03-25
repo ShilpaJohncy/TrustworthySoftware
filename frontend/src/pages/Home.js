@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {faFolder, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import {faFolder, faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Popup} from "semantic-ui-react"
 import Result from "./Result";
@@ -24,13 +24,22 @@ function findTotal() {
 
 function ifSmallerSum() {
     let arr = document.getElementsByName('percentage');
-    if (total < 100 && (arr[4].value > 0)) {
-        alert("Please make sure numbers total 100");
-        arr[4].value = null;
+    if (total < 100 && total > 0) {
+        if(arr[arr.length - 1].value > 0){
+            arr[arr.length - 1].value = null;
+        }
+        alert("Please make sure weightages total 100");
         return false;
     }
     return true;
 }
+
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
 
 class Home extends Component {
 
@@ -45,7 +54,17 @@ class Home extends Component {
         this.setPercentage = this.setPercentage.bind(this);
     }
 
-    onInputChange(event) {
+    async onInputChange(event) {
+        // if(event.target.name === "exe"){
+        //     this.setState({
+        //         [event.target.name]:await toBase64(event.target.value)
+        //     });
+        // }
+        // else{
+        //     this.setState({
+        //         [event.target.name]:event.target.value
+        //     });
+        // }
         this.setState({
             [event.target.name]:event.target.value
         });
@@ -58,7 +77,23 @@ class Home extends Component {
     }
 
     async onSubmitForm(event) {
-        if (ifSmallerSum()) {
+        let val = true;
+        let fieldNames = "";
+        if(!this.state.vendor){
+            fieldNames += " Vendor name;"
+        }
+        if(!this.state.product){
+            fieldNames += " Product name; "
+        }
+        if(!this.state.exe){
+            fieldNames += " Application; "
+        }
+
+        if (!this.state.vendor || !this.state.product || !this.state.exe) {
+            alert('Please enter required fields : ' + fieldNames );
+            val = false;
+        }
+        if (ifSmallerSum() && val) {
             const object = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -89,6 +124,7 @@ class Home extends Component {
                                     <input name={"exe"} type="file" value={this.state.value}
                                            onChange={this.onInputChange} accept={".exe"}/>
                                     Browse
+                                    <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                 </label>
                                 <input name={"exe"} className={"file-browse input-group-addon"} type="text"
                                        value={this.state.exe}
@@ -101,25 +137,27 @@ class Home extends Component {
                                 <Popup content='Name of the company selling the software'
                                        trigger={<label className={"field-label input-group-addon"}> Vendor
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                           <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                        </label>}
                                        className={"popup"}
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
                                 <input name={"vendor"} className={"text input-group-addon"} type="text"
                                        value={this.state.vendor}
-                                       placeholder={"Microsoft"} onChange={this.onInputChange}/>
+                                       placeholder={"Microsoft"} onChange={this.onInputChange} required={true}/>
 
                                 {/* Product field */}
                                 <Popup content='Name of the software/application to be tested'
                                        trigger={<label className={"field-label input-group-addon"}> Product
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                           <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
                                        </label>}
                                        className={"popup"}
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
                                 <input name={"product"} className={"text input-group-addon"} type="text"
                                        value={this.state.product}
-                                       placeholder={"Excel"} onChange={this.onInputChange}/>
+                                       placeholder={"Excel"} onChange={this.onInputChange} required/>
 
                                 {/* Version field */}
                                 <Popup content='The version no. of the application, if known.'
