@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {faFolder, faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Popup} from "semantic-ui-react"
+import {Button, Popup} from "semantic-ui-react"
 import Result from "./Result";
 
 let total = 0;
@@ -59,24 +59,13 @@ class Home extends Component {
         });
     }
 
-    async onSubmitForm(event) {
-        let val = true;
-        let fieldNames = "";
-        if(!this.state.vendor){
-            fieldNames += " Vendor name;"
-        }
-        if(!this.state.product){
-            fieldNames += " Product name; "
-        }
-        if(!this.state.exe){
-            fieldNames += " Application; "
-        }
+    requiredFields(){
+        const isEnabled = this.state.vendor && this.state.product && this.state.exe;
+        return isEnabled;
+    }
 
-        if (!this.state.vendor || !this.state.product || !this.state.exe) {
-            alert('Please enter required fields : ' + fieldNames );
-            val = false;
-        }
-        if (ifSmallerSum() && val) {
+    async onSubmitForm(event) {
+        if (ifSmallerSum()) {
             const object = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -85,17 +74,23 @@ class Home extends Component {
 
             await fetch('submit', object).then((response) => {response.json().then(
                 data => {
-                this.setState({ redirect: "/Verdict", data: JSON.stringify(data)});}
-            )
-            });
+                    this.setState({
+                        redirect: "/Verdict",
+                        data: JSON.stringify(data)
+                    });
+                }
+            )});
             event.preventDefault();
+
         }
     }
 
     render() {
         if (this.state.redirect) {
-             return <Result path="/Verdict" message={(this.state.data) } />
+            return <Result message={(this.state.data)} />
+             // return <Redirect to={this.state.redirect} push={(this.state.data)} />
         }
+
         return (
             <div className="contents">
                 <h1>Trustworthy Analyser</h1>
@@ -220,7 +215,11 @@ class Home extends Component {
                                        placeholder={"20"} onInput={findTotal} onChange={this.setPercentage}/>
 
                             </form>
-                            <input type={"submit"} className={"btn input-group-addon"} onClick={this.onSubmitForm}/>
+                            <Button disabled={!this.requiredFields()}
+                                    style={this.requiredFields() ? {opacity: 1} : {opacity: 0.5}}
+                                    className={"btn input-group-addon"} onClick={this.onSubmitForm}>
+                                Submit
+                            </Button>
                         </div>
                     </div>
                 </div>

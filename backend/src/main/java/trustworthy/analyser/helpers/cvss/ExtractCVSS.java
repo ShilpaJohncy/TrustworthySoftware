@@ -120,6 +120,7 @@ public class ExtractCVSS {
             }
         }catch(IOException e){
             e.printStackTrace();
+            return null;
         }
         return null;
     }

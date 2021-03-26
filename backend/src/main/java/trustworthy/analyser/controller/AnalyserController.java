@@ -40,10 +40,10 @@ public class AnalyserController {
             product.setResiliency(RESILIENCE_WEIGHTAGE);
         }else{
             product.setSecurity(requestObject.getSecurity());
-            product.setSafety(requestObject.getSecurity());
-            product.setAvailability(requestObject.getSecurity());
-            product.setReliability(requestObject.getSecurity());
-            product.setResiliency(requestObject.getSecurity());
+            product.setSafety(requestObject.getSafety());
+            product.setAvailability(requestObject.getAvailability());
+            product.setReliability(requestObject.getReliability());
+            product.setResiliency(requestObject.getResiliency());
         }
 
 

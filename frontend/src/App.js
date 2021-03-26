@@ -39,19 +39,17 @@ const App = () => {
                         </div>
                     </div>
 
-                    <div className="content">
-                        <Switch>
-                            <Route exact path="/">
-                                <Home />
-                            </Route>
-                            <Route path="/About">
-                                <About />
-                            </Route>
-                            <Route path="/Verdict">
-                                <Result />
-                            </Route>
-                        </Switch>
-                    </div>
+                    <Switch>
+                        <Route exact path="/">
+                            <Home />
+                        </Route>
+                        <Route path="/About">
+                            <About />
+                        </Route>
+                        <Route path="/Verdict">
+                            <Result />
+                        </Route>
+                    </Switch>
 
                 </nav>
             </main>
