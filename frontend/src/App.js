@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home";
-import About from "./pages/About";
+import Documentation from "./pages/Documentation";
 import {Link} from "react-router-dom";
 import Result from "./pages/Result";
 
@@ -25,15 +25,11 @@ const App = () => {
                                 <span className={currCount === 0 && 'text-active'}> Home</span>
                             </Link>
 
-                            <Link className={currCount === 1 && 'active'} onClick={() => onClickTab(1)} to="/About">
-                                <span className={currCount === 1 && 'text-active'}> About</span>
+                            <Link className={currCount === 1 && 'active'} onClick={() => onClickTab(1)} to="/Documentation">
+                                <span className={currCount === 1 && 'text-active'}> Documentation</span>
                             </Link>
 
-                            <Link className={currCount === 2 && 'active'} onClick={() => onClickTab(2)} to="/About">
-                                <span className={currCount === 2 && 'text-active'}>Documentation</span>
-                            </Link>
-
-                            <Link className={currCount === 3 && 'active'} onClick={() => onClickTab(3)} to="/About">
+                            <Link className={currCount === 3 && 'active'} onClick={() => onClickTab(3)} to="/Documentation">
                                 <span className={currCount === 3 && 'text-active'}>Contact</span>
                             </Link>
                         </div>
@@ -43,8 +39,8 @@ const App = () => {
                         <Route exact path="/">
                             <Home />
                         </Route>
-                        <Route path="/About">
-                            <About />
+                        <Route path="/Documentation">
+                            <Documentation />
                         </Route>
                         <Route path="/Verdict">
                             <Result />

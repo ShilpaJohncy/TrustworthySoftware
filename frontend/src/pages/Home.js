@@ -39,8 +39,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: null,
-            data: []
+            redirect: false
         };
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
@@ -64,22 +63,9 @@ class Home extends Component {
         return isEnabled;
     }
 
-    async onSubmitForm(event) {
+    onSubmitForm(event) {
         if (ifSmallerSum()) {
-            const object = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.state)
-            }
-
-            await fetch('submit', object).then((response) => {response.json().then(
-                data => {
-                    this.setState({
-                        redirect: "/Verdict",
-                        data: JSON.stringify(data)
-                    });
-                }
-            )});
+            this.setState({ redirect: true });
             event.preventDefault();
 
         }
@@ -87,8 +73,7 @@ class Home extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Result message={(this.state.data)} />
-             // return <Redirect to={this.state.redirect} push={(this.state.data)} />
+            return <Result message={JSON.stringify(this.state)} />
         }
 
         return (
@@ -98,15 +83,18 @@ class Home extends Component {
                     <div className="box">
                         <div>
                             <form>
-                                <label className={"btn input-group-addon"}> <FontAwesomeIcon icon={faFolder} className={"icon"}/>
-                                    <input name={"exe"} type="file" value={this.state.value}
-                                           onChange={this.onInputChange} accept={".exe"}/>
-                                    Browse
-                                    <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
-                                </label>
+                                <Popup content='The path to the location of the application.exe to be tested'
+                                       trigger={<label className={"field-label input-group-addon"}> Application Path
+                                           <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                           <FontAwesomeIcon icon={faAsterisk} className={"asterix"}/>
+                                       </label>}
+                                       className={"popup"}
+                                       mouseEnterDelay={1000}
+                                       mouseLeaveDelay={500}/>
+
                                 <input name={"exe"} className={"file-browse input-group-addon"} type="text"
                                        value={this.state.exe}
-                                       placeholder={"Choose application"}
+                                       placeholder={"C:\\fakepath\\application.exe"}
                                        onChange={this.onInputChange}/>
                             </form>
 
