@@ -57,13 +57,12 @@ p, li {
 
 .box {
   padding: 30px;
+  //background: #77c9d4,;
   display: flex;
   border: 3px solid;
+  //border-left: 7px solid grey;
   align-items: center;
   justify-content: center;
-  width: 70%;
-  height: 300px;
-  box-sizing: content-box;
 
 }
 
