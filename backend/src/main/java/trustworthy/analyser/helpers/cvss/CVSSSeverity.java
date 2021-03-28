@@ -1,4 +1,4 @@
-package trustworthy.analyser.cvss;
+package trustworthy.analyser.helpers.cvss;
 
 /**
  * An enum with the possible values for CVSS Severity

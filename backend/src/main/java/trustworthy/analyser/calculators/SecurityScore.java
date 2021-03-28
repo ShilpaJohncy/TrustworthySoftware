@@ -1,12 +1,12 @@
-package trustworthy.analyser.scoreCalculators;
+package trustworthy.analyser.calculators;
 
 import org.json.JSONException;
 import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.cvss.CalculateCVSSScore.calculateCVSSScore;
-import static trustworthy.analyser.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helpers.cvss.CalculateCVSSScore.calculateCVSSScore;
+import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
 
 public class SecurityScore {
     /**
@@ -18,9 +18,7 @@ public class SecurityScore {
         int cvssScore = getCVSSScore(product);
         int wincheckScore = getWeightedWinchecksecScores(product);
         securityScore = cvssScore + wincheckScore;
-        securityScore = securityScore/100;
-        securityScore *= product.getSecurity();
-        return (Math.round( securityScore * 100.0 ) / 100.0);
+        return securityScore;
     }
 
     /**

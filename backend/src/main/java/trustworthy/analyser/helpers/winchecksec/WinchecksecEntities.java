@@ -1,4 +1,4 @@
-package trustworthy.analyser.winchecksec;
+package trustworthy.analyser.helpers.winchecksec;
 
 import lombok.Getter;
 import lombok.Setter;

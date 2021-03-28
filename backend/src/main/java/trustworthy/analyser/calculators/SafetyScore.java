@@ -1,25 +1,25 @@
-package trustworthy.analyser.scoreCalculators;
+package trustworthy.analyser.calculators;
 
 import org.json.JSONException;
 import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helpers.manalyzer.Manalyzer.getManalyzeReport;
+import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
 
-public class ResiliencyScore {
+public class SafetyScore {
 
     /**
-     * Function to run all tests required to extract a score for the resiliency of a given product
+     * Function to run all tests required to extract a score for the safety of a given product
      * @param product - The application who's safety is to be determined
      */
-    public static double runResiliencyTests(Product product){
-        double resiliencyScore = 0;
+    public static double runSafetyTests(Product product){
+        double safetyScore = 0;
+        getManalyzeReport(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
-        resiliencyScore = winchecksecScore;
-        resiliencyScore = resiliencyScore/20;
-        resiliencyScore *= product.getResiliency();
-        return(Math.round( resiliencyScore * 100.0 ) / 100.0);
+        safetyScore = product.getManalyzeScore() + winchecksecScore;
+        return safetyScore;
     }
 
     /**
@@ -32,22 +32,15 @@ public class ResiliencyScore {
         try {
             getWinCheckSecScores(product);
         } catch (IOException | JSONException e) {
-            //Return dump value for PoC
-            return 16;
+            return 56;
         }
 
         int wincheckScore = 0;
         if(product.isAuthenticode()){
-            wincheckScore += 5;
+            wincheckScore += 50;
         }
         if(product.isForceIntegrity()){
-            wincheckScore += 3;
-        }
-        if(product.isSafeSEH()){
-            wincheckScore += 7;
-        }
-        if(product.isSeh()){
-            wincheckScore += 5;
+            wincheckScore += 20;
         }
         return wincheckScore;
     }

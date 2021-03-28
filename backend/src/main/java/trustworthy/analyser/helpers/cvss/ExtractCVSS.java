@@ -1,4 +1,4 @@
-package trustworthy.analyser.cvss;
+package trustworthy.analyser.helpers.cvss;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -120,6 +120,7 @@ public class ExtractCVSS {
             }
         }catch(IOException e){
             e.printStackTrace();
+            return null;
         }
         return null;
     }

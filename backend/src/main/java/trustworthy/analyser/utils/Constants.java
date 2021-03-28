@@ -34,11 +34,11 @@ public final class Constants {
     public static int RELIABILITY_WEIGHTAGE = 0;
 
     // Trustworthy Verdict - possible values
-    public static final String VERY_HIGH = "Very Trustworthy";
+    public static final String VERY_HIGH = "Highly Trustworthy";
     public static final String HIGH = "Trustworthy";
-    public static final String INCONCLUSIVE = "Data gathered on the product is inconclusive";
-    public static final String LOW = "Not trustworthy ";
-    public static final String VERY_LOW = "Really not trustworthy";
+    public static final String INCONCLUSIVE = "Inconclusive analysis";
+    public static final String LOW = "Untrustworthy ";
+    public static final String VERY_LOW = "Highly Untrustworthy";
 
 
 

@@ -1,27 +1,24 @@
-package trustworthy.analyser.scoreCalculators;
+package trustworthy.analyser.calculators;
 
 import org.json.JSONException;
 import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
 
-import static trustworthy.analyser.manalyzer.Manalyzer.getManalyzeReport;
-import static trustworthy.analyser.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
 
-public class SafetyScore {
+public class ResiliencyScore {
 
     /**
-     * Function to run all tests required to extract a score for the safety of a given product
+     * Function to run all tests required to extract a score for the resiliency of a given product
      * @param product - The application who's safety is to be determined
      */
-    public static double runSafetyTests(Product product){
-        double safetyScore = 0;
-        getManalyzeReport(product);
+    public static double runResiliencyTests(Product product){
+        double resiliencyScore = 0;
         int winchecksecScore = getWeightedWinchecksecScores(product);
-        safetyScore = product.getManalyzeScore() + winchecksecScore;
-        safetyScore = safetyScore/100;
-        safetyScore *= product.getSafety();
-        return (Math.round( safetyScore * 100.0 ) / 100.0);
+        resiliencyScore = winchecksecScore;
+        resiliencyScore = resiliencyScore/20;
+        return(resiliencyScore*100);
     }
 
     /**
@@ -34,15 +31,22 @@ public class SafetyScore {
         try {
             getWinCheckSecScores(product);
         } catch (IOException | JSONException e) {
-            return 56;
+            //Return dump value for PoC
+            return 16;
         }
 
         int wincheckScore = 0;
         if(product.isAuthenticode()){
-            wincheckScore += 50;
+            wincheckScore += 5;
         }
         if(product.isForceIntegrity()){
-            wincheckScore += 20;
+            wincheckScore += 3;
+        }
+        if(product.isSafeSEH()){
+            wincheckScore += 7;
+        }
+        if(product.isSeh()){
+            wincheckScore += 5;
         }
         return wincheckScore;
     }

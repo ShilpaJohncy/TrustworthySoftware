@@ -7,8 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import trustworthy.analyser.dataObjects.AnalyserRequestObject;
-import trustworthy.analyser.dataObjects.AnalyserResponseObject;
+import trustworthy.analyser.data.AnalyserRequestObject;
+import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.service.AnalyserService;
 import trustworthy.analyser.utils.Product;
 
@@ -40,10 +40,10 @@ public class AnalyserController {
             product.setResiliency(RESILIENCE_WEIGHTAGE);
         }else{
             product.setSecurity(requestObject.getSecurity());
-            product.setSafety(requestObject.getSecurity());
-            product.setAvailability(requestObject.getSecurity());
-            product.setReliability(requestObject.getSecurity());
-            product.setResiliency(requestObject.getSecurity());
+            product.setSafety(requestObject.getSafety());
+            product.setAvailability(requestObject.getAvailability());
+            product.setReliability(requestObject.getReliability());
+            product.setResiliency(requestObject.getResiliency());
         }
 
 
@@ -144,6 +144,6 @@ public class AnalyserController {
         AnalyserResponseObject response = service.runResiliencyTest(product);
 
         Gson gson = new Gson();
-        return gson.toJson(response.getResilienceScore());
+        return gson.toJson(response.getResiliencyScore());
     }
 }

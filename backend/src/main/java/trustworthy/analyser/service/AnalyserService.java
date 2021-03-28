@@ -1,13 +1,13 @@
 package trustworthy.analyser.service;
 
 import org.springframework.stereotype.Service;
-import trustworthy.analyser.dataObjects.AnalyserResponseObject;
+import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.utils.Product;
 
-import static trustworthy.analyser.scoreCalculators.AvailabilityScore.runAvailabilityTests;
-import static trustworthy.analyser.scoreCalculators.ResiliencyScore.runResiliencyTests;
-import static trustworthy.analyser.scoreCalculators.SafetyScore.runSafetyTests;
-import static trustworthy.analyser.scoreCalculators.SecurityScore.runSecurityTests;
+import static trustworthy.analyser.calculators.AvailabilityScore.runAvailabilityTests;
+import static trustworthy.analyser.calculators.ResiliencyScore.runResiliencyTests;
+import static trustworthy.analyser.calculators.SafetyScore.runSafetyTests;
+import static trustworthy.analyser.calculators.SecurityScore.runSecurityTests;
 import static trustworthy.analyser.utils.Constants.*;
 
 @Service
@@ -27,12 +27,12 @@ public class AnalyserService {
             responseObject.setSafetyScore(runSafetyTests(product));
         }
         if(product.getResiliency() > 0){
-            responseObject.setResilienceScore(runResiliencyTests(product));
+            responseObject.setResiliencyScore(runResiliencyTests(product));
         }
         if(product.getAvailability() > 0){
             responseObject.setAvailabilityScore(runAvailabilityTests(product));
         }
-        calculateVerdict(responseObject);
+        calculateVerdict(responseObject, product);
         return responseObject;
     }
 
@@ -40,19 +40,31 @@ public class AnalyserService {
      * Private function to calculate the verdict for the app based on all the other test s that were run.
      * @param responseObject - The product's whose trustworthiness is being decided.
      */
-    private static void calculateVerdict(AnalyserResponseObject responseObject) {
-        double sum = responseObject.getSecurityScore() + responseObject.getAvailabilityScore() + responseObject.getSafetyScore() + responseObject.getResilienceScore();
+    private static void calculateVerdict(AnalyserResponseObject responseObject, Product product) {
+        double weightedSecurityScore = (responseObject.getSecurityScore()* product.getSecurity())/100;
+        weightedSecurityScore = Math.round( weightedSecurityScore * 100.0 ) / 100.0;
+
+        double weightedSafetyScore = (responseObject.getSafetyScore() * product.getSafety())/100;
+        weightedSafetyScore = Math.round( weightedSafetyScore * 100.0 ) / 100.0;
+
+        double weightedAvailabilityScore = (responseObject.getAvailabilityScore() * product.getAvailability())/100;
+        weightedAvailabilityScore = Math.round( weightedAvailabilityScore * 100.0 ) / 100.0;
+
+        double weightedResiliencyScore = (responseObject.getResiliencyScore() * product.getResiliency())/100;
+        weightedResiliencyScore = Math.round( weightedResiliencyScore * 100.0 ) / 100.0;
+
+        double sum = weightedSecurityScore + weightedSafetyScore + weightedAvailabilityScore + weightedResiliencyScore;
         int trustworthyScore = (int) Math.rint(sum);
         responseObject.setTrustworthyScore(trustworthyScore);
         if (trustworthyScore < 20) {
             responseObject.setVerdict(VERY_LOW);
-        }else if (trustworthyScore >= 20 && trustworthyScore < 40) {
+        }else if (trustworthyScore < 40) {
             responseObject.setVerdict(LOW);
-        }else if (trustworthyScore >= 40 && trustworthyScore < 60) {
+        }else if (trustworthyScore < 60) {
             responseObject.setVerdict(INCONCLUSIVE);
-        }else if (trustworthyScore >= 60 && trustworthyScore < 80) {
+        }else if (trustworthyScore < 80) {
             responseObject.setVerdict(HIGH);
-        }else if (trustworthyScore >= 80) {
+        }else {
             responseObject.setVerdict(VERY_HIGH);
         }
     }
@@ -97,7 +109,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runResiliencyTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setResilienceScore(runResiliencyTests(product));
+        responseObject.setResiliencyScore(runResiliencyTests(product));
         return responseObject;
     }
 }
