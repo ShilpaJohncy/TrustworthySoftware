@@ -18,9 +18,7 @@ public class SecurityScore {
         int cvssScore = getCVSSScore(product);
         int wincheckScore = getWeightedWinchecksecScores(product);
         securityScore = cvssScore + wincheckScore;
-        securityScore = securityScore/100;
-        securityScore *= product.getSecurity();
-        return (Math.round( securityScore * 100.0 ) / 100.0);
+        return securityScore;
     }
 
     /**

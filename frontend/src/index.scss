@@ -1,11 +1,5 @@
 .bg {
-  //background-image: linear-gradient(to top right, whitesmoke, #116466  );
   background-image: linear-gradient(to top, #116466, #1e7a7c, #3ea0a2, #eae7e0, floralwhite);
-  //background-image: linear-gradient(to right, #210441, #2b106b, #501ea0, #5c3bab);
-  //background-image: linear-gradient(to right, #1e7a7c, #77c9d4, #57BC90);
-  //background-image: linear-gradient(to right, #77C9D4, #57BC90);
-  //background-image: linear-gradient(to top, #E9B000, floralwhite);
-  position: fixed;
   min-width: 100%;
   min-height: 100%;
 }
@@ -57,13 +51,10 @@ p, li {
 
 .box {
   padding: 30px;
-  //background: #77c9d4,;
   display: flex;
   border: 3px solid;
-  //border-left: 7px solid grey;
   align-items: center;
   justify-content: center;
-
 }
 
 .input-group-addon {
@@ -86,7 +77,6 @@ p, li {
   margin-right: 25px;
 }
 .verdict{
-  //max-width: 135px;
   color: #0a0a0a;
   background-color: #fffaf0;
   text-align: center;
@@ -164,10 +154,6 @@ body {
   margin: 0;
   box-sizing: border-box;
   font-family: "Noto Sans", "SansSerif";
-  //background-color: floralwhite;
-  //background-image: linear-gradient(to bottom, white, floralwhite, #83ddd2, #5fddcd);
-  //background-image: linear-gradient(to top, white, floralwhite, #83ddd2, #5fddcd);
-
 }
 
 .navbar {

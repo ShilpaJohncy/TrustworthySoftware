@@ -9,7 +9,7 @@ public class AnalyserResponseObject {
     private double securityScore;
     private double safetyScore;
     private double availabilityScore;
-    private double resilienceScore;
+    private double resiliencyScore;
     private double reliabilityScore;
     private int trustworthyScore;
     private String verdict;

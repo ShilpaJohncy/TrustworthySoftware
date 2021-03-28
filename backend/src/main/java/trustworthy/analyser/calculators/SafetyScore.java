@@ -19,9 +19,7 @@ public class SafetyScore {
         getManalyzeReport(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
         safetyScore = product.getManalyzeScore() + winchecksecScore;
-        safetyScore = safetyScore/100;
-        safetyScore *= product.getSafety();
-        return (Math.round( safetyScore * 100.0 ) / 100.0);
+        return safetyScore;
     }
 
     /**

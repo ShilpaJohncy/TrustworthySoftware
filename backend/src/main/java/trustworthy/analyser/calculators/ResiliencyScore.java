@@ -18,8 +18,7 @@ public class ResiliencyScore {
         int winchecksecScore = getWeightedWinchecksecScores(product);
         resiliencyScore = winchecksecScore;
         resiliencyScore = resiliencyScore/20;
-        resiliencyScore *= product.getResiliency();
-        return(Math.round( resiliencyScore * 100.0 ) / 100.0);
+        return(resiliencyScore*100);
     }
 
     /**

@@ -144,6 +144,6 @@ public class AnalyserController {
         AnalyserResponseObject response = service.runResiliencyTest(product);
 
         Gson gson = new Gson();
-        return gson.toJson(response.getResilienceScore());
+        return gson.toJson(response.getResiliencyScore());
     }
 }
