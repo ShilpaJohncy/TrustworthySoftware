@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {faFolder, faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
+import {faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Button, Popup} from "semantic-ui-react"
 import Result from "./Result";
@@ -126,7 +126,7 @@ class Home extends Component {
                                        placeholder={"Excel"} onChange={this.onInputChange} />
 
                                 {/* Version field */}
-                                <Popup content='The version no. of the application, if known.'
+                                <Popup content='The version no. of the application, if known'
                                        trigger={<label className={"field-label input-group-addon"}> Version number
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
                                        </label>}
@@ -139,7 +139,7 @@ class Home extends Component {
                             </form>
 
                             <form>
-                                <Popup content='Security - The ability of the software to remain protected against the hazards'
+                                <Popup content='Weightage for security aspect of the app'
                                        trigger={<label className={"field-label input-group-addon"}> Security
                                            <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
                                        </label>}
@@ -151,7 +151,7 @@ class Home extends Component {
                                        pattern="[0-9]*" maxLength={3} value={this.state.value}
                                        placeholder={"20"} onInput={findTotal} onChange={this.setPercentage}/>
                                        
-                                <Popup content='Safety - The ability of the software to operate without causing harm to anything or anyone'
+                                <Popup content='Weightage for the safety aspect of the app'
                                        trigger={<label className={"field-label input-group-addon"}> Safety<FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/> </label>}
@@ -163,7 +163,7 @@ class Home extends Component {
                                        pattern="[0-9]*" maxLength={3} value={this.state.value}
                                        placeholder={"20"} onInput={findTotal} onChange={this.setPercentage}/>
     
-                                <Popup content='Resilience -The ability of the software to recover from errors quickly and completely.'
+                                <Popup content='Weightage for the resilience aspect of the app'
                                        trigger={<label className={"field-label input-group-addon"}> Resiliency <FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>}
@@ -176,7 +176,7 @@ class Home extends Component {
                                        pattern="[0-9]*" maxLength={3} value={this.state.value}
                                        placeholder={"20"} onInput={findTotal} onChange={this.setPercentage}/>
     
-                                <Popup content='Reliability - The ability of the software to operate correctly.'
+                                <Popup content='Weightage for the reliability aspect of the app'
                                        trigger={<label className={"field-label input-group-addon"}> Reliability <FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>}
@@ -189,7 +189,7 @@ class Home extends Component {
                                        pattern="[0-9]*" maxLength={3} value={this.state.value}
                                        placeholder={"20"} onInput={findTotal} onChange={this.setPercentage}/>
     
-                                <Popup content='Availability - The ability of the software to operate when required.'
+                                <Popup content='Weightage for the availability aspect of the app'
                                        trigger={ <label className={"field-label input-group-addon"}> Availability <FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>
