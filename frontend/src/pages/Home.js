@@ -75,9 +75,8 @@ class Home extends Component {
     onSubmitForm(event) {
         if (ifSmallerSum() && validateInput(this.state.exe)) {
             this.setState({ redirect: true });
-            event.preventDefault();
-
         }
+        event.preventDefault();
     }
 
     render() {
