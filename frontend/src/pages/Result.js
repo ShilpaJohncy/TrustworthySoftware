@@ -125,7 +125,7 @@ class Result extends Component {
                             </form>
                             <form>
                                 <Popup content='Trustworthiness score calculated based on the weighted scores of each of the above facets'
-                                       trigger={ <label className={"field-label input-group-addon"}> Trustworthy score <FontAwesomeIcon
+                                       trigger={ <label className={"field-label input-group-addon"}> Trustworthiness <FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>
                                        }
