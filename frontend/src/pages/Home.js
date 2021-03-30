@@ -1,10 +1,19 @@
 import React, {Component} from "react";
-import {faFolder, faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
+import {faQuestionCircle, faAsterisk} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Button, Popup} from "semantic-ui-react"
 import Result from "./Result";
 
 let total = 0;
+
+function validateInput(exePath){
+    let regex = /([\w](\:))(([\w|\s]*\\)*)+([\w]*)+(.EXE|.exe)/
+    if(!regex.test(exePath)){
+        alert("Uh oh! Looks like you chose a wrong file.")
+        return false
+    }
+    return true
+}
 
 function findTotal() {
     let tot = 0;
@@ -64,7 +73,7 @@ class Home extends Component {
     }
 
     onSubmitForm(event) {
-        if (ifSmallerSum()) {
+        if (ifSmallerSum() && validateInput(event.target.value)) {
             this.setState({ redirect: true });
             event.preventDefault();
 
@@ -94,6 +103,7 @@ class Home extends Component {
 
                                 <input name={"exe"} className={"file-browse input-group-addon"} type="text"
                                        value={this.state.exe}
+                                       pattern="/([\w](\:))(([\w|\s]*\\)*)+([\w]*)+(.EXE|.exe)/"
                                        placeholder={"C:\\fakepath\\application.exe"}
                                        onChange={this.onInputChange}/>
                             </form>
