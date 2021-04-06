@@ -37,7 +37,7 @@ public class SafetyScore {
 
         int wincheckScore = 0;
         if(product.isAuthenticode()){
-            wincheckScore += 50;
+            wincheckScore += 20;
         }
         if(product.isForceIntegrity()){
             wincheckScore += 20;

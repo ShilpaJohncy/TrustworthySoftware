@@ -134,7 +134,7 @@ class Result extends Component {
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
                                        <label className={"verdict input-group-addon"} placeholder={"0%"} >
-                                           {(this.state.isFetching) ? "   ": (this.state.result.trustworthyScore + "%   ")}
+                                           {(this.state.isFetching) ? "   ": (this.state.result.trustworthyScore + "  ")}
 
                                            {/*<input name="score"  className={" percentage input-group-addon"} type="text"*/}
                                            {/*       pattern="[0-9]*" maxLength={3} }*/}

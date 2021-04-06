@@ -1,9 +1,9 @@
-package trustworthy.analyser.calculators;
+package trustworthy.analyser.utils;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import static trustworthy.analyser.calculators.AvailabilityScore.runExecutable;
+import static trustworthy.analyser.utils.ExecuteApplication.runExecutable;
 
 @Getter
 @Setter

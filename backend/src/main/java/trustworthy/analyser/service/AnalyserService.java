@@ -5,6 +5,7 @@ import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.utils.Product;
 
 import static trustworthy.analyser.calculators.AvailabilityScore.runAvailabilityTests;
+import static trustworthy.analyser.calculators.ReliabilityScore.runReliabilityTests;
 import static trustworthy.analyser.calculators.ResiliencyScore.runResiliencyTests;
 import static trustworthy.analyser.calculators.SafetyScore.runSafetyTests;
 import static trustworthy.analyser.calculators.SecurityScore.runSecurityTests;
@@ -30,12 +31,10 @@ public class AnalyserService {
             responseObject.setResiliencyScore(runResiliencyTests(product));
         }
         if(product.getAvailability() > 0){
-            responseObject.setAvailabilityScore((runAvailabilityTests(product)/NO_OF_TRIES) * 100);
+            responseObject.setAvailabilityScore(runAvailabilityTests(product));
         }
         if(product.getReliability() > 0){
-            int noOfFailures = NO_OF_TRIES - runAvailabilityTests(product);
-            long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
-            responseObject.setReliabilityScore((double)noOfFailures/(double)totalTimeRun * 100);
+            responseObject.setReliabilityScore(runReliabilityTests(product));
 
         }
         calculateVerdict(responseObject, product);
@@ -122,4 +121,14 @@ public class AnalyserService {
         return responseObject;
     }
 
+    /**
+     * The service that will run tests to determine if the software is reliable
+     * @param product - The product details passed
+     * @return AnalyserResponseObject - An object with the reliability score calculated
+     */
+    public AnalyserResponseObject runReliabilityTest(Product product){
+        AnalyserResponseObject responseObject = new AnalyserResponseObject();
+        responseObject.setAvailabilityScore(runReliabilityTests(product));
+        return responseObject;
+    }
 }
