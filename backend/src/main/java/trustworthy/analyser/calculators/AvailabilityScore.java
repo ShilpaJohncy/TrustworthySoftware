@@ -20,8 +20,9 @@ public class AvailabilityScore {
      * @param product - The product who's availability is to be tested
      * @return availabilityScore - The availability score based on weightage
      */
-    public static double runAvailabilityTests(Product product) {
+    public static int runAvailabilityTests(Product product) {
         double availabilityScore = 0;
+        double reliabilityScore = 0;
         int successfulRuns;
         if(!product.isParallelize()){
             successfulRuns = serialExecutionTest(product);
@@ -34,8 +35,9 @@ public class AvailabilityScore {
         }
 
         // Available all the time
-        availabilityScore = (successfulRuns/NO_OF_TRIES) * 100;
-        return (availabilityScore);
+//        availabilityScore = (successfulRuns/NO_OF_TRIES) * 100;
+//        reliabilityScore = ((NO_OF_TRIES-successfulRuns)/(NO_OF_TRIES * NAIVE_TIMEOUT)) * 100;
+        return (successfulRuns);
     }
 
     /**

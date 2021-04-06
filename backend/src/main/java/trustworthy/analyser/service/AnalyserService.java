@@ -30,12 +30,14 @@ public class AnalyserService {
             responseObject.setResiliencyScore(runResiliencyTests(product));
         }
         if(product.getAvailability() > 0){
-            responseObject.setAvailabilityScore(runAvailabilityTests(product));
+            responseObject.setAvailabilityScore((runAvailabilityTests(product)/NO_OF_TRIES) * 100);
         }
         if(product.getReliability() > 0){
-            responseObject.setReliabilityScore(runReliabilityTests(responseObject, product));
+            int noOfFailures = NO_OF_TRIES - runAvailabilityTests(product);
+            long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
+            responseObject.setReliabilityScore((double)noOfFailures/(double)totalTimeRun * 100);
+
         }
-        System.out.println(responseObject.getReliabilityScore());
         calculateVerdict(responseObject, product);
         return responseObject;
     }
@@ -120,14 +122,4 @@ public class AnalyserService {
         return responseObject;
     }
 
-    private double runReliabilityTests(AnalyserResponseObject object, Product product) {
-        double availabilityScore = (object.getAvailabilityScore() > 0) ? object.getAvailabilityScore(): runAvailabilityTests(product);
-        if(availabilityScore == 100){
-            return 100;
-        }
-        else{
-            availabilityScore/=100;
-            return (25 * availabilityScore)/(1 - availabilityScore);
-        }
-    }
 }
