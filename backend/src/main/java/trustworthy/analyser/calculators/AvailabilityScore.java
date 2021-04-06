@@ -34,22 +34,8 @@ public class AvailabilityScore {
         }
 
         // Available all the time
-        if (successfulRuns == NO_OF_TRIES){
-            availabilityScore = 3;
-        }
-        // Available more than half the time
-        else if (successfulRuns > ((NO_OF_TRIES/2) + 1)){
-            availabilityScore = 2;
-        }
-        // Inconclusive
-        else if(successfulRuns == ((NO_OF_TRIES/2) + 1)){
-            availabilityScore = 1;
-        }
-        // Not available
-        else{
-            availabilityScore = 0;
-        }
-        return (availabilityScore/3)*100;
+        availabilityScore = (successfulRuns/NO_OF_TRIES) * 100;
+        return (availabilityScore);
     }
 
     /**

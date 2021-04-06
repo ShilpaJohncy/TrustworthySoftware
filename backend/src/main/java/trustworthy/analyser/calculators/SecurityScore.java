@@ -37,25 +37,25 @@ public class SecurityScore {
 
         int wincheckScore = 0;
         if(product.isDotNET()){
-            wincheckScore += 40;
+            wincheckScore += 37;
         }
         else{
             if(product.isAslr()){
-                wincheckScore += 23;
+                wincheckScore += 19;
             }
             if(product.isNx()){
-                wincheckScore += 17;
+                wincheckScore += 18;
             }
         }
 
         if(product.isCfg()){
-            wincheckScore += 15;
+            wincheckScore += 16;
         }
         if(product.isGs()){
-            wincheckScore += 15;
+            wincheckScore += 13;
         }
         if(product.isRfg()){
-            wincheckScore += 10;
+            wincheckScore += 16;
         }
         if(product.isDynamicBase()){
             wincheckScore += 5;

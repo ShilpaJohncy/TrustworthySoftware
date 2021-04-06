@@ -32,6 +32,10 @@ public class AnalyserService {
         if(product.getAvailability() > 0){
             responseObject.setAvailabilityScore(runAvailabilityTests(product));
         }
+        if(product.getReliability() > 0){
+            responseObject.setReliabilityScore(runReliabilityTests(responseObject, product));
+        }
+        System.out.println(responseObject.getReliabilityScore());
         calculateVerdict(responseObject, product);
         return responseObject;
     }
@@ -53,7 +57,10 @@ public class AnalyserService {
         double weightedResiliencyScore = (responseObject.getResiliencyScore() * product.getResiliency())/100;
         weightedResiliencyScore = Math.round( weightedResiliencyScore * 100.0 ) / 100.0;
 
-        double sum = weightedSecurityScore + weightedSafetyScore + weightedAvailabilityScore + weightedResiliencyScore;
+        double weightedReliabilityScore = (responseObject.getReliabilityScore() * product.getReliability())/100;
+        weightedReliabilityScore = Math.round( weightedReliabilityScore * 100.0 ) / 100.0;
+
+        double sum = weightedSecurityScore + weightedSafetyScore + weightedAvailabilityScore + weightedResiliencyScore + weightedReliabilityScore;
         int trustworthyScore = (int) Math.rint(sum);
         responseObject.setTrustworthyScore(trustworthyScore);
         if (trustworthyScore < 20) {
@@ -111,5 +118,16 @@ public class AnalyserService {
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         responseObject.setResiliencyScore(runResiliencyTests(product));
         return responseObject;
+    }
+
+    private double runReliabilityTests(AnalyserResponseObject object, Product product) {
+        double availabilityScore = (object.getAvailabilityScore() > 0) ? object.getAvailabilityScore(): runAvailabilityTests(product);
+        if(availabilityScore == 100){
+            return 100;
+        }
+        else{
+            availabilityScore/=100;
+            return (25 * availabilityScore)/(1 - availabilityScore);
+        }
     }
 }
