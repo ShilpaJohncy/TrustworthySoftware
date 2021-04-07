@@ -175,9 +175,8 @@ class Result extends Component {
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
                                 <input id={"confidence"} className={"percentage input-group-addon"}
-                                       type="text" placeholder={"Confidence in the result"} value={"100%"} disabled/>
-
-
+                                       type="text" value={(this.state.isFetching) ? "": (this.state.result.confidence + "%")}
+                                       placeholder={"100%"} disabled/>
                             </form>
 
                             <Button disabled={this.state.isFetching}

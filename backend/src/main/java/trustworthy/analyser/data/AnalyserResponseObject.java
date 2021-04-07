@@ -13,4 +13,5 @@ public class AnalyserResponseObject {
     private double reliabilityScore;
     private int trustworthyScore;
     private String verdict;
+    private double confidence;
 }

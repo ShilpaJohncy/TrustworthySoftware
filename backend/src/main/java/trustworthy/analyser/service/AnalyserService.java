@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import trustworthy.analyser.data.AnalyserResponseObject;
 import trustworthy.analyser.utils.Product;
 
+import java.text.DecimalFormat;
+
 import static trustworthy.analyser.calculators.AvailabilityScore.runAvailabilityTests;
 import static trustworthy.analyser.calculators.ReliabilityScore.runReliabilityTests;
 import static trustworthy.analyser.calculators.ResiliencyScore.runResiliencyTests;
@@ -38,6 +40,7 @@ public class AnalyserService {
 
         }
         calculateVerdict(responseObject, product);
+        calculateConfidence(responseObject, product);
         return responseObject;
     }
 
@@ -75,6 +78,21 @@ public class AnalyserService {
         }else {
             responseObject.setVerdict(VERY_HIGH);
         }
+    }
+    /**
+     * Private function to calculate the confidence in the result for the app based on all the other tests that were run.
+     * @param responseObject - The product with a verdict and the confidence in the result calculated..
+     */
+    private static void calculateConfidence(AnalyserResponseObject responseObject, Product product) {
+        double security = (product.getSecurityConfidence() * product.getSecurity()) / 100;
+        double safety = (product.getSafetyConfidence() * product.getSafety()) / 100;
+        double resiliency = (product.getResiliencyConfidence() * product.getResiliency()) / 100;
+        double reliability = (product.getReliabilityConfidence() * product.getReliability()) / 100;
+        double availability = (product.getAvailabilityConfidence() * product.getAvailability()) / 100;
+        double confidence = security + safety + availability + reliability + resiliency;
+        DecimalFormat df = new DecimalFormat("#.#");
+        confidence = Double.parseDouble(df.format(confidence));
+        responseObject.setConfidence(confidence);
     }
 
     /**

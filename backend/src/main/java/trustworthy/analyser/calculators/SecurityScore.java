@@ -18,6 +18,7 @@ public class SecurityScore {
         int cvssScore = getCVSSScore(product);
         int wincheckScore = getWeightedWinchecksecScores(product);
         securityScore = cvssScore + wincheckScore;
+        product.setSecurityConfidence((product.getSecurityConfidence()/800 )* 100);
         return securityScore;
     }
 
@@ -30,6 +31,7 @@ public class SecurityScore {
     private static int getWeightedWinchecksecScores(Product product){
         try {
             getWinCheckSecScores(product);
+            product.setSecurityConfidence(product.getSecurityConfidence() + 700);
         } catch (IOException | JSONException e) {
             // Return dump value for PoC
             return 72;

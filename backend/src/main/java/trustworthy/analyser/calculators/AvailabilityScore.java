@@ -21,6 +21,7 @@ public class AvailabilityScore {
         int successfulRuns = executeApplication(product);
         long upTime = successfulRuns * (NAIVE_TIMEOUT/1000);
         long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
+        product.setAvailabilityConfidence(75);
         return ((double)(upTime)/(double)totalTimeRun * 100);
     }
 }

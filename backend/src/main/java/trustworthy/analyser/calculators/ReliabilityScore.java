@@ -17,6 +17,7 @@ public class ReliabilityScore {
         int noOfFailures = NO_OF_TRIES - executeApplication(product);
         long totalTimeRun = 5L; // (NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
         double failureRate = (double)(noOfFailures)/(double)totalTimeRun;
+        product.setReliabilityConfidence(75);
         return ( (1 - failureRate)* 100);
     }
 }

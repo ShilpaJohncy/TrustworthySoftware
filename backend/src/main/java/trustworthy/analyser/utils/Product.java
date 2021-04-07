@@ -25,6 +25,12 @@ public class Product {
     private int resiliency = RESILIENCE_WEIGHTAGE;
     private int reliability = RELIABILITY_WEIGHTAGE;
 
+    private double securityConfidence;
+    private double safetyConfidence;
+    private double availabilityConfidence;
+    private double resiliencyConfidence;
+    private double reliabilityConfidence;
+
     private double cvssScore;
     private double manalyzeScore;
     private boolean dynamicBase;
