@@ -146,4 +146,27 @@ public class AnalyserController {
         Gson gson = new Gson();
         return gson.toJson(response.getResiliencyScore());
     }
+
+    /**
+     * Calculates the reliability score for a product
+     * @param requestObject - An object of the type AnalyserRequestObject
+     * @return The reliability score
+     */
+    @ApiOperation(value = "Calculate the reliability score out of 100")
+    @PostMapping(value = "/calculateReliability")
+    public String getReliability(@RequestBody AnalyserRequestObject requestObject) {
+
+        Product product = new Product();
+        product.setExecutablePath(requestObject.getExe());
+        product.setVendorName(requestObject.getVendor());
+        product.setProductName(requestObject.getProduct());
+        product.setVersionNo(requestObject.getVersion());
+        product.setReliability(100);
+
+        AnalyserService service = new AnalyserService();
+        AnalyserResponseObject response = service.runReliabilityTest(product);
+
+        Gson gson = new Gson();
+        return gson.toJson(response.getReliabilityScore());
+    }
 }

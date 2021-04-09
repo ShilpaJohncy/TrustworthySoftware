@@ -109,7 +109,7 @@ class Result extends Component {
                                        pattern="[0-9]*" maxLength={3} value={(this.state.isFetching) ? "": (this.state.result.reliabilityScore + "%")}
                                        placeholder={"0"} disabled/>
 
-                                <Popup content='Availability score of hte application'
+                                <Popup content='Availability score of the application'
                                        trigger={ <label className={"field-label input-group-addon"}> Availability <FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>
@@ -125,7 +125,7 @@ class Result extends Component {
                             </form>
                             <form>
                                 <Popup content='Trustworthiness score calculated based on the weighted scores of each of the above facets'
-                                       trigger={ <label className={"field-label input-group-addon"}> Trustworthiness <FontAwesomeIcon
+                                       trigger={ <label className={"field-label input-group-addon"}> Trustworthy Points<FontAwesomeIcon
                                            icon={faQuestionCircle}
                                            className={"qmark"}/></label>
                                        }
@@ -133,9 +133,27 @@ class Result extends Component {
                                        offset={[0,0]}
                                        mouseEnterDelay={1000}
                                        mouseLeaveDelay={500}/>
-                                <input name="score" className={"percentage input-group-addon"} type="text"
-                                       pattern="[0-9]*" maxLength={3} value={(this.state.isFetching) ? "": (this.state.result.trustworthyScore + "%")}
-                                       placeholder={"0"} disabled/>
+                                       <label className={"verdict input-group-addon"} placeholder={"0%"} >
+                                           {(this.state.isFetching) ? "   ": (this.state.result.trustworthyScore + "  ")}
+
+                                           {/*<input name="score"  className={" percentage input-group-addon"} type="text"*/}
+                                           {/*       pattern="[0-9]*" maxLength={3} }*/}
+                                           {/*       placeholder={"0"} disabled/>*/}
+                                           <Rating className={"rating"}
+                                                   size="small"
+                                                   value={
+                                                       (this.state.isFetching) ? 0 : (
+                                                           (this.state.result.trustworthyScore < 20) ? 1  : (
+                                                               (this.state.result.trustworthyScore < 40) ? 2 : (
+                                                                   (this.state.result.trustworthyScore < 60) ? 3 :(
+                                                                       (this.state.result.trustworthyScore < 80) ? 4 : 5
+                                                                   )
+                                                               )
+                                                           )
+                                                       )
+                                                   }
+                                                   readOnly={true}/>
+                                       </label>
 
                             </form>
                             <form>
@@ -148,20 +166,17 @@ class Result extends Component {
                                        mouseLeaveDelay={500}/>
                                 <input id={"verdict"} className={"verdict input-group-addon"}
                                        type="text" placeholder={"Verdict"} value={(this.state.result.verdict)} disabled/>
-                                <Rating className={"rating"}
-                                        size="large"
-                                        value={
-                                            (this.state.isFetching) ? 0 : (
-                                                (this.state.result.trustworthyScore < 20) ? 1  : (
-                                                    (this.state.result.trustworthyScore < 40) ? 2 : (
-                                                        (this.state.result.trustworthyScore < 60) ? 3 :(
-                                                            (this.state.result.trustworthyScore < 80) ? 4 : 5
-                                                        )
-                                                    )
-                                                )
-                                            )
-                                        }
-                                        readOnly={true}/>
+
+                                <Popup content='Confidence level in the verdict'
+                                       trigger={<label className={"field-label input-group-addon"}> Confidence in Verdict
+                                           <FontAwesomeIcon icon={faQuestionCircle} className={"qmark"}/>
+                                       </label>}
+                                       className={"popup"}
+                                       mouseEnterDelay={1000}
+                                       mouseLeaveDelay={500}/>
+                                <input id={"confidence"} className={"percentage input-group-addon"}
+                                       type="text" value={(this.state.isFetching) ? "": (this.state.result.confidence + "%")}
+                                       placeholder={"100%"} disabled/>
                             </form>
 
                             <Button disabled={this.state.isFetching}

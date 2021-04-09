@@ -28,10 +28,6 @@ const App = () => {
                             <Link className={currCount === 1 && 'active'} onClick={() => onClickTab(1)} to="/Documentation">
                                 <span className={currCount === 1 && 'text-active'}> Documentation</span>
                             </Link>
-
-                            <Link className={currCount === 3 && 'active'} onClick={() => onClickTab(3)} to="/Documentation">
-                                <span className={currCount === 3 && 'text-active'}>Contact</span>
-                            </Link>
                         </div>
                     </div>
 

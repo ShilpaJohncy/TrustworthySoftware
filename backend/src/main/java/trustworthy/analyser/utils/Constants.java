@@ -27,11 +27,11 @@ public final class Constants {
     public static final int LOW_WEIGHTAGE = 1;
 
     // The weightage of each facet of trustworthiness
-    public static int SECURITY_WEIGHTAGE = 25;
-    public static int AVAILABILITY_WEIGHTAGE = 25;
-    public static int SAFETY_WEIGHTAGE = 25;
-    public static int RESILIENCE_WEIGHTAGE = 25;
-    public static int RELIABILITY_WEIGHTAGE = 0;
+    public static int SECURITY_WEIGHTAGE = 20;
+    public static int AVAILABILITY_WEIGHTAGE = 20;
+    public static int SAFETY_WEIGHTAGE = 20;
+    public static int RESILIENCE_WEIGHTAGE = 20;
+    public static int RELIABILITY_WEIGHTAGE = 20;
 
     // Trustworthy Verdict - possible values
     public static final String VERY_HIGH = "Highly Trustworthy";

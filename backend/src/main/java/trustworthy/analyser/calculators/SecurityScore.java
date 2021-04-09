@@ -18,6 +18,7 @@ public class SecurityScore {
         int cvssScore = getCVSSScore(product);
         int wincheckScore = getWeightedWinchecksecScores(product);
         securityScore = cvssScore + wincheckScore;
+        product.setSecurityConfidence((product.getSecurityConfidence()/800 )* 100);
         return securityScore;
     }
 
@@ -30,6 +31,7 @@ public class SecurityScore {
     private static int getWeightedWinchecksecScores(Product product){
         try {
             getWinCheckSecScores(product);
+            product.setSecurityConfidence(product.getSecurityConfidence() + 700);
         } catch (IOException | JSONException e) {
             // Return dump value for PoC
             return 72;
@@ -37,25 +39,25 @@ public class SecurityScore {
 
         int wincheckScore = 0;
         if(product.isDotNET()){
-            wincheckScore += 40;
+            wincheckScore += 37;
         }
         else{
             if(product.isAslr()){
-                wincheckScore += 23;
+                wincheckScore += 19;
             }
             if(product.isNx()){
-                wincheckScore += 17;
+                wincheckScore += 18;
             }
         }
 
         if(product.isCfg()){
-            wincheckScore += 15;
+            wincheckScore += 16;
         }
         if(product.isGs()){
-            wincheckScore += 15;
+            wincheckScore += 13;
         }
         if(product.isRfg()){
-            wincheckScore += 10;
+            wincheckScore += 16;
         }
         if(product.isDynamicBase()){
             wincheckScore += 5;

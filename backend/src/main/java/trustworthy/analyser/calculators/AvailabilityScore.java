@@ -1,12 +1,13 @@
 package trustworthy.analyser.calculators;
 
+import org.json.JSONException;
 import trustworthy.analyser.utils.Product;
 
 import java.io.IOException;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
-import static trustworthy.analyser.utils.Constants.*;
+import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.utils.ExecuteApplication.executeApplication;
+import static trustworthy.analyser.utils.Constants.NAIVE_TIMEOUT;
 
 public class AvailabilityScore {
 
@@ -21,118 +22,41 @@ public class AvailabilityScore {
      * @return availabilityScore - The availability score based on weightage
      */
     public static double runAvailabilityTests(Product product) {
-        double availabilityScore = 0;
-        int successfulRuns;
-        if(!product.isParallelize()){
-            successfulRuns = serialExecutionTest(product);
-        }else{
-            try {
-                successfulRuns = parallelExecutionTest(product);
-            } catch (InterruptedException e) {
-                successfulRuns = 0;
-            }
-        }
+        double operationAvailability =  calculateOperationalAvailability(product);
+        int winchecksecScore = getWeightedWinchecksecScores(product);
+        product.setAvailabilityConfidence((product.getAvailabilityConfidence()/300) * 100);
+        return operationAvailability + winchecksecScore;
+    }
 
-        // Available all the time
-        if (successfulRuns == NO_OF_TRIES){
-            availabilityScore = 3;
-        }
-        // Available more than half the time
-        else if (successfulRuns > ((NO_OF_TRIES/2) + 1)){
-            availabilityScore = 2;
-        }
-        // Inconclusive
-        else if(successfulRuns == ((NO_OF_TRIES/2) + 1)){
-            availabilityScore = 1;
-        }
-        // Not available
-        else{
-            availabilityScore = 0;
-        }
-        return (availabilityScore/3)*100;
+    private static double calculateOperationalAvailability(Product product){
+        executeApplication(product);
+        long upTime = product.getSuccessfulRuns() * (NAIVE_TIMEOUT/1000);
+        long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
+        product.setAvailabilityConfidence(product.getAvailabilityConfidence() + 95);
+        return (((double)upTime/(double)totalTimeRun) * 80);
     }
 
     /**
-     * This function is called if the product is expected to run in parallel.
-     *
-     * @param product - The product who's availability is to be tested.
-     * @throws InterruptedException - When the thread is interrupted.
-     * @return the number of successful runs
+     * Calculate a weighted winchecksec score for the given product
+     * @param product - The product whose winchecksec
+     * @return - the winchecksec score calculated based on the weights assigned
+     *         - -1 if the winchecksec did not occur without any issues.
      */
-    private static int parallelExecutionTest(Product product) throws InterruptedException {
-        RunnableImplementation runnable = new RunnableImplementation(product.getExecutablePath());
-        Thread[] threads = new Thread[NO_OF_TRIES];
-        for(int threadCount = 0; threadCount < NO_OF_TRIES; threadCount++){
-            Thread thread = new Thread(runnable);
-            thread.start();
-            threads[threadCount]=thread;
+    private static int getWeightedWinchecksecScores(Product product){
+        try{
+            getWinCheckSecScores(product);
+            product.setAvailabilityConfidence(product.getAvailabilityConfidence() + 200);
+        } catch (IOException | JSONException e) {
+            //Return dump value for PoC
+            return -1;
         }
-        //Wait for all threads to be closed
-        for(Thread thread:threads){
-            thread.join();
+        int wincheckScore = 0;
+        if(product.isAuthenticode()){
+            wincheckScore += 10;
         }
-        return runnable.getSuccessfulRuns();
-    }
-
-    /**
-     * This function is called when the product is not expected to run in parallel.
-     *
-     * @param product - The product who's availability is to be tested.
-     * @return the number of successful runs
-     */
-    private static int serialExecutionTest(Product product){
-        int successfulRuns = 0;
-        for(int runCount = 1; runCount <= NO_OF_TRIES; runCount++){
-            if(runExecutable(product.getExecutablePath())){
-                successfulRuns++;
-            }
+        if(product.isForceIntegrity()){
+            wincheckScore += 10;
         }
-        return successfulRuns;
-    }
-
-    /**
-     * Function that executes the program once.
-     *
-     * @param productExePath - The path to the executable of the product to be tested.
-     * @return {@code true} if the process ran without any issues and {@code false} if
-     *              the process was unable to run for the set timeout time/ if the process got interrupted.
-     */
-    public static boolean runExecutable(String productExePath) {
-        ProcessBuilder builder = new ProcessBuilder(productExePath);
-        Process process;
-        try {
-            // Start the process
-            process = builder.start();
-
-            // If the process is null or if it didn't stay alive for the timeout period, it is not available
-            if(process == null || process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
-                killProcess(process);
-                return false;
-            }
-
-        } catch (InterruptedException | IOException e) {
-            return false;
-        }
-
-        // Reaches here if the process ran without any problem
-        // Get the PID of the process and kill it
-        killProcess(process);
-        return true;
-    }
-
-    /**
-     * Private function to ensure that the process and its children are killed.
-     *
-     * @param process - The process to be killed
-     */
-    private static void killProcess(Process process){
-        if(process != null){
-            long pid = process.pid();
-            Optional<ProcessHandle> optionalProcessHandle = ProcessHandle.of(pid);
-            optionalProcessHandle.ifPresent(ProcessHandle::destroy);
-            if (process.isAlive()) {
-                process.destroyForcibly();
-            }
-        }
+        return wincheckScore;
     }
 }

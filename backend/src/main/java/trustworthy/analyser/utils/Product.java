@@ -19,11 +19,19 @@ public class Product {
     private boolean checkNaive = true;
 
     private boolean ranWinchecksec = false;
+    private boolean executedApp = false;
+    private int successfulRuns;
     private int security = SECURITY_WEIGHTAGE;
     private int safety = SAFETY_WEIGHTAGE;
     private int availability = AVAILABILITY_WEIGHTAGE;
     private int resiliency = RESILIENCE_WEIGHTAGE;
     private int reliability = RELIABILITY_WEIGHTAGE;
+
+    private double securityConfidence;
+    private double safetyConfidence;
+    private double availabilityConfidence;
+    private double resiliencyConfidence;
+    private double reliabilityConfidence;
 
     private double cvssScore;
     private double manalyzeScore;

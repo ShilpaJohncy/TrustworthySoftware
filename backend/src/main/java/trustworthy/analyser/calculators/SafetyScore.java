@@ -19,6 +19,7 @@ public class SafetyScore {
         getManalyzeReport(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
         safetyScore = product.getManalyzeScore() + winchecksecScore;
+        product.setSafetyConfidence((product.getSafetyConfidence()/300 )* 100);
         return safetyScore;
     }
 
@@ -31,13 +32,14 @@ public class SafetyScore {
     private static int getWeightedWinchecksecScores(Product product){
         try {
             getWinCheckSecScores(product);
+            product.setSafetyConfidence(product.getSafetyConfidence() + 200);
         } catch (IOException | JSONException e) {
-            return 56;
+            return -1;
         }
 
         int wincheckScore = 0;
         if(product.isAuthenticode()){
-            wincheckScore += 50;
+            wincheckScore += 20;
         }
         if(product.isForceIntegrity()){
             wincheckScore += 20;
