@@ -54,7 +54,7 @@ public class Manalyzer {
                             break;
                     }
                 }
-                // Scale the score up/down to out of 30.
+                // Scale the score up/down to out of 60.
                 product.setManalyzeScore(manalyzeScore/(pluginCount*5) * 60);
             }
             product.setSafetyConfidence(product.getSafetyConfidence() + 80);

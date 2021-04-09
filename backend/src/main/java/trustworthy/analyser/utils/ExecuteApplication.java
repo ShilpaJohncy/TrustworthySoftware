@@ -14,18 +14,21 @@ public class ExecuteApplication {
      * @param product - The product who's availability is to be tested
      * @return successfulRuns - The number of runs the application ran without any failures
      */
-    public static int executeApplication(Product product) {
-        int successfulRuns;
-        if(!product.isParallelize()){
-            successfulRuns = serialExecutionTest(product);
-        }else{
-            try {
-                successfulRuns = parallelExecutionTest(product);
-            } catch (InterruptedException e) {
-                successfulRuns = 0;
+    public static void executeApplication(Product product) {
+        if(!product.isExecutedApp()){
+            int successfulRuns;
+            if(!product.isParallelize()){
+                successfulRuns = serialExecutionTest(product);
+            }else{
+                try {
+                    successfulRuns = parallelExecutionTest(product);
+                } catch (InterruptedException e) {
+                    successfulRuns = 0;
+                }
             }
+            product.setSuccessfulRuns(successfulRuns);
+            product.setExecutedApp(true);
         }
-        return (successfulRuns);
     }
 
     /**

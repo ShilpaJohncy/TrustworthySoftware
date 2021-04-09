@@ -20,7 +20,6 @@ public class SafetyScore {
         int winchecksecScore = getWeightedWinchecksecScores(product);
         safetyScore = product.getManalyzeScore() + winchecksecScore;
         product.setSafetyConfidence((product.getSafetyConfidence()/300 )* 100);
-
         return safetyScore;
     }
 

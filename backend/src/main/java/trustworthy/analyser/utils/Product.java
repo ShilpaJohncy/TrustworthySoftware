@@ -19,6 +19,8 @@ public class Product {
     private boolean checkNaive = true;
 
     private boolean ranWinchecksec = false;
+    private boolean executedApp = false;
+    private int successfulRuns;
     private int security = SECURITY_WEIGHTAGE;
     private int safety = SAFETY_WEIGHTAGE;
     private int availability = AVAILABILITY_WEIGHTAGE;
