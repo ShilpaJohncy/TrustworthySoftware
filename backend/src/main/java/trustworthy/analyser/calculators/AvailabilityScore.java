@@ -24,7 +24,6 @@ public class AvailabilityScore {
     public static double runAvailabilityTests(Product product) {
         double operationAvailability =  calculateOperationalAvailability(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
-        System.out.println(winchecksecScore);
         product.setAvailabilityConfidence((product.getAvailabilityConfidence()/300) * 100);
         return operationAvailability + winchecksecScore;
     }
