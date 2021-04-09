@@ -24,11 +24,12 @@ public class AvailabilityScore {
     public static double runAvailabilityTests(Product product) {
         double operationAvailability =  calculateOperationalAvailability(product);
         int winchecksecScore = getWeightedWinchecksecScores(product);
+        System.out.println(winchecksecScore);
         product.setAvailabilityConfidence((product.getAvailabilityConfidence()/300) * 100);
         return operationAvailability + winchecksecScore;
     }
 
-    private static double calculateOperationalAvailability(Product product){
+    public static double calculateOperationalAvailability(Product product){
         executeApplication(product);
         long upTime = product.getSuccessfulRuns() * (NAIVE_TIMEOUT/1000);
         long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
@@ -42,7 +43,7 @@ public class AvailabilityScore {
      * @return - the winchecksec score calculated based on the weights assigned
      *         - -1 if the winchecksec did not occur without any issues.
      */
-    private static int getWeightedWinchecksecScores(Product product){
+    public static int getWeightedWinchecksecScores(Product product){
         try{
             getWinCheckSecScores(product);
             product.setAvailabilityConfidence(product.getAvailabilityConfidence() + 200);

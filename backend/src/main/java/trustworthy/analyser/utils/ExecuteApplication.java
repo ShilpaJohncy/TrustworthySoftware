@@ -66,6 +66,7 @@ public class ExecuteApplication {
                 successfulRuns++;
             }
         }
+
         return successfulRuns;
     }
 
@@ -82,14 +83,16 @@ public class ExecuteApplication {
         try {
             // Start the process
             process = builder.start();
-
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
-            if(process == null || process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
+            if(process == null || process.waitFor(10000, TimeUnit.MICROSECONDS)){
+                System.out.println("Here  ");
                 killProcess(process);
                 return false;
             }
 
         } catch (InterruptedException | IOException e) {
+
+
             return false;
         }
 

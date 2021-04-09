@@ -14,7 +14,7 @@ public final class Constants {
     public static final String NVD_SEARCH_POSTFIX = "/products/cpe/search?";
     public static final String CPE_PREFIX = "cpe:2.3:a:";
     public static final String MANALYZER_URL = "https://manalyzer.org";
-    public static final String WINCHECKSEC_EXE = "backend/src/main/resources/winchecksec/winchecksec.exe";
+    public static final String WINCHECKSEC_EXE = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\main\\resources\\winchecksec\\winchecksec.exe";
 
     public static final int NO_OF_TRIES = 5;
     public static final long NAIVE_TIMEOUT = 1000L;
