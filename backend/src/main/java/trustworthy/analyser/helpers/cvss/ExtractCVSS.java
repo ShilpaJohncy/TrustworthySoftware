@@ -119,7 +119,6 @@ public class ExtractCVSS {
                 return scoreRatings;
             }
         }catch(IOException e){
-            e.printStackTrace();
             return null;
         }
         return null;

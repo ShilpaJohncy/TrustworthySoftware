@@ -48,7 +48,7 @@ public class AnalyserService {
      * Private function to calculate the verdict for the app based on all the other test s that were run.
      * @param responseObject - The product's whose trustworthiness is being decided.
      */
-    private static void calculateVerdict(AnalyserResponseObject responseObject, Product product) {
+    public static void calculateVerdict(AnalyserResponseObject responseObject, Product product) {
         double weightedSecurityScore = (responseObject.getSecurityScore()* product.getSecurity())/100;
         weightedSecurityScore = Math.round( weightedSecurityScore * 100.0 ) / 100.0;
 

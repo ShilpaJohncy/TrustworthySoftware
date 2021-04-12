@@ -40,6 +40,4 @@ public final class Constants {
     public static final String LOW = "Untrustworthy ";
     public static final String VERY_LOW = "Highly Untrustworthy";
 
-
-
 }
