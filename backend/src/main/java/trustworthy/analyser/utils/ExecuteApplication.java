@@ -55,7 +55,7 @@ public class ExecuteApplication {
             // Start the process
             process = builder.start();
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
-            if(process == null || process.waitFor(1000, TimeUnit.MILLISECONDS)){
+            if(process == null || process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
                 killProcess(process);
                 return false;
             }

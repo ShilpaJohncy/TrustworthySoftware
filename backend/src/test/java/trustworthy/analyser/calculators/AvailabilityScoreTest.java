@@ -13,8 +13,8 @@ import static trustworthy.analyser.utils.Constants.ZOOM_EXE;
 public class AvailabilityScoreTest {
 
     final String word = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE";
-    final String failHalfTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TestApps\\AppFailingOneOutOfTwoTimes.exe";
-    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TestApps\\AppFailingAllTheTime.exe";
+    final String failHalfTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\test\\resources\\TestApps\\AppFailingOneOutOfTwoTimes.exe";
+    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\test\\resources\\TestApps\\AppFailingAllTheTime.exe";
 
     @Test
     public void runOperationalAvailabilityTest(){
