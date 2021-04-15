@@ -46,7 +46,6 @@ public class ManalyzerAPI {
                 return null;
             }
         } catch (IOException |JSONException e) {
-            e.printStackTrace();
             return null;
         }
     }

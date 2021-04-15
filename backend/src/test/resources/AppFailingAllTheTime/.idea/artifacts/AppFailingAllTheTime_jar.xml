@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AppFailingAllTheTime:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AppFailingAllTheTime_jar</output-path>
+    <root id="archive" name="AppFailingAllTheTime.jar">
+      <element id="module-output" name="AppFailingAllTheTime" />
+    </root>
+  </artifact>
+</component>

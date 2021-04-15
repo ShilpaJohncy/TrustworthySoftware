@@ -39,7 +39,6 @@ public class Product {
     private boolean aslr;
     private boolean highEntropyVA;
     private boolean forceIntegrity;
-    private boolean isolation;
     private boolean nx;
     private boolean seh;
     private boolean cfg;

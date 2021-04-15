@@ -12,7 +12,6 @@ public class AnalyserRequestObject {
     @NonNull private String product;
     private String version;
     private boolean isParallelize;
-    private boolean checkNaive;
     private int security;
     private int safety;
     private int availability;

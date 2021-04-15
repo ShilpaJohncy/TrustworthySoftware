@@ -30,25 +30,12 @@ public class CalculateCVSSScoreTest {
         product.setProductName("zoom");
         product.setVersionNo("4.6.10");
         product.setParallelize(false);
-
-//        Product product = new Product();
-//        product.setExecutablePath(ZOOM_EXE);
-//        product.setVendorName("Microsoft");
-//        product.setProductName("word");
-//        product.setVersionNo("");
-//        product.setParallelize(false);
-//        extractCVSSScore("Microsoft", "word", "");
-//        extractCVSSScore("notepad-plus-plus", "Notepad\\+\\+", "7.6.6");
-//        extractCVSSScore("adobe", "acrobat_reader_dc", "20.012.20048");
-//        extractCVSSScore("mcafee", "livesafe", "");
-
         calculateCVSSScore(product);
-        assertEquals(product.getCvssScore(), 8.75, 0);
+        assertEquals(7.5, product.getCvssScore(),0);
     }
 
     @Test
     public void checkValidTestCaseWithoutVersionNo(){
-
         Product product = new Product();
         product.setExecutablePath(ZOOM_EXE);
         product.setVendorName("Zoom");
@@ -56,6 +43,6 @@ public class CalculateCVSSScoreTest {
         product.setParallelize(false);
 
         calculateCVSSScore(product);
-        assertEquals(8.75, product.getCvssScore() , 0);
+        assertEquals(7.5, product.getCvssScore() , 0);
     }
 }

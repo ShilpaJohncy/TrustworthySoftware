@@ -87,7 +87,6 @@ public class Manalyzer {
             scores.add(Integer.parseInt(String.valueOf(pluginCount)));
             return scores;
         } catch (JSONException e) {
-            e.printStackTrace();
             return null;
         }
     }
