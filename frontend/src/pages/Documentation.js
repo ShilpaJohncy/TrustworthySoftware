@@ -16,7 +16,7 @@ class Documentation extends React.Component {
                             <li style={{'text-align': 'left'}} > Availability - Ability of the software to operate when required</li>
                         </ul>
                         <p> Each of the above facets are scored based on the weighted results from testing multiple features.</p>
-                        <p> Find out more about the trustworthy analyser by exploring its codebase on <a href={"https://github.com/ShilpaJohncy/TrustworthySoftware"}>GitHub</a></p>
+                        <p> Find out more about the trustworthy analyser by exploring its codebase on <a href={"https://github.com/ShilpaJohncy/TrustworthySoftware"} style ={{color: '#0e22cb','text-decoration': 'underline #0e22cb'}}>GitHub</a></p>
                         <p> And if you have more questions or ideas to improve this tool, feel free to reach out at shilpamaria.johncy@gmail.com </p>
                         <p>Keep in touch...</p>
                     </div>
