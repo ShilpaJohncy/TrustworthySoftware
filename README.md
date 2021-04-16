@@ -6,3 +6,5 @@ Trustworthy Analyser is a tool created to analyse the trustworthiness of a Windo
 
 The backend of the project is a SpringBoot REST microservice. 
 More documentation on how to access the endpoints available can be viewed at http://localhost:8080/swagger-ui.html#/ 
+
+The frontend of the project is a ReactJS website which can be spawned from your localhost.

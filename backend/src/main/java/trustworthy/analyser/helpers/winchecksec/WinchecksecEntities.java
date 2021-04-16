@@ -10,7 +10,6 @@ public class WinchecksecEntities {
     private MitigationEntityFields aslr;
     private MitigationEntityFields highEntropyVA;
     private MitigationEntityFields forceIntegrity;
-    private MitigationEntityFields isolation;
     private MitigationEntityFields nx;
     private MitigationEntityFields seh;
     private MitigationEntityFields cfg;

@@ -63,7 +63,6 @@ public class Winchecksec {
         product.setDynamicBase(checkPresence(response.getMitigations().getDynamicBase().getPresence()));
         product.setHighEntropyVA(checkPresence(response.getMitigations().getHighEntropyVA().getPresence()));
         product.setForceIntegrity(checkPresence(response.getMitigations().getForceIntegrity().getPresence()));
-        product.setIsolation(checkPresence(response.getMitigations().getIsolation().getPresence()));
         product.setNx(checkPresence(response.getMitigations().getNx().getPresence()));
         product.setSeh(checkPresence(response.getMitigations().getSeh().getPresence()));
         product.setCfg(checkPresence(response.getMitigations().getCfg().getPresence()));

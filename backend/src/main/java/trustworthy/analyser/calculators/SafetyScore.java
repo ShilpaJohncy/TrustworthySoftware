@@ -36,7 +36,6 @@ public class SafetyScore {
         } catch (IOException | JSONException e) {
             return -1;
         }
-
         int wincheckScore = 0;
         if(product.isAuthenticode()){
             wincheckScore += 20;

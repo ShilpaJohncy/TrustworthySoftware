@@ -82,7 +82,6 @@ public class AnalyserController {
      * @param requestObject - An object of the type AnalyserRequestObject
      * @return The safety score
      */
-    //TODO: Return the safety verdict with the score
     @ApiOperation(value = "Calculate the safety score out of 100")
     @PostMapping(value = "/calculateSafety")
     public String getSafety(@RequestBody AnalyserRequestObject requestObject) {

@@ -1,6 +1,7 @@
 package trustworthy.analyser.utils;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -17,40 +18,10 @@ public class ExecuteApplication {
     public static void executeApplication(Product product) {
         if(!product.isExecutedApp()){
             int successfulRuns;
-            if(!product.isParallelize()){
-                successfulRuns = serialExecutionTest(product);
-            }else{
-                try {
-                    successfulRuns = parallelExecutionTest(product);
-                } catch (InterruptedException e) {
-                    successfulRuns = 0;
-                }
-            }
+            successfulRuns = serialExecutionTest(product);
             product.setSuccessfulRuns(successfulRuns);
             product.setExecutedApp(true);
         }
-    }
-
-    /**
-     * This function is called if the product is expected to run in parallel.
-     *
-     * @param product - The product who's availability is to be tested.
-     * @throws InterruptedException - When the thread is interrupted.
-     * @return the number of successful runs
-     */
-    private static int parallelExecutionTest(Product product) throws InterruptedException {
-        RunnableImplementation runnable = new RunnableImplementation(product.getExecutablePath());
-        Thread[] threads = new Thread[NO_OF_TRIES];
-        for(int threadCount = 0; threadCount < NO_OF_TRIES; threadCount++){
-            Thread thread = new Thread(runnable);
-            thread.start();
-            threads[threadCount]=thread;
-        }
-        //Wait for all threads to be closed
-        for(Thread thread:threads){
-            thread.join();
-        }
-        return runnable.getSuccessfulRuns();
     }
 
     /**
@@ -66,6 +37,7 @@ public class ExecuteApplication {
                 successfulRuns++;
             }
         }
+
         return successfulRuns;
     }
 
@@ -82,13 +54,11 @@ public class ExecuteApplication {
         try {
             // Start the process
             process = builder.start();
-
             // If the process is null or if it didn't stay alive for the timeout period, it is not available
             if(process == null || process.waitFor(NAIVE_TIMEOUT, TimeUnit.MILLISECONDS)){
                 killProcess(process);
                 return false;
             }
-
         } catch (InterruptedException | IOException e) {
             return false;
         }
