@@ -9,8 +9,7 @@ import static trustworthy.analyser.calculators.ResiliencyScore.runResiliencyTest
 
 class ResiliencyScoreTest {
 
-    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TestApps\\AppFailingAllTheTime.exe";
-
+    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\test\\resources\\TestApps\\AppFailingAllTheTime.exe";
     @Test
     public void runResiliencyTest() {
         Product testProduct = new Product();

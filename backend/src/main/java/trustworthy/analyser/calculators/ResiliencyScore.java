@@ -18,7 +18,7 @@ public class ResiliencyScore {
         int winchecksecScore = getWeightedWinchecksecScores(product);
         resiliencyScore = winchecksecScore;
         resiliencyScore = resiliencyScore/10;
-        product.setResiliencyConfidence((product.getResiliencyConfidence()/200)* 100);
+        product.setResiliencyConfidence((product.getResiliencyConfidence()/100)* 100);
         return(resiliencyScore*100);
     }
 
@@ -31,7 +31,7 @@ public class ResiliencyScore {
     private static int getWeightedWinchecksecScores(Product product){
         try {
             getWinCheckSecScores(product);
-            product.setResiliencyConfidence(product.getResiliencyConfidence() + 200);
+            product.setResiliencyConfidence(product.getResiliencyConfidence() + 100);
         } catch (IOException | JSONException e) {
             //Return dump value for PoC
             return -1;
@@ -39,10 +39,10 @@ public class ResiliencyScore {
 
         int wincheckScore = 0;
         if(product.isSafeSEH()){
-            wincheckScore += 5;
+            wincheckScore += 10;
         }
         if(product.isSeh()){
-            wincheckScore += 5;
+            wincheckScore += 10;
         }
         return wincheckScore;
     }

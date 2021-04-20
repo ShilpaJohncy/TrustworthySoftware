@@ -6,6 +6,7 @@ import trustworthy.analyser.utils.Product;
 import java.io.IOException;
 
 import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.utils.Constants.NO_OF_TRIES;
 import static trustworthy.analyser.utils.ExecuteApplication.executeApplication;
 import static trustworthy.analyser.utils.Constants.NAIVE_TIMEOUT;
 
@@ -31,7 +32,7 @@ public class AvailabilityScore {
     public static double calculateOperationalAvailability(Product product){
         executeApplication(product);
         long upTime = product.getSuccessfulRuns() * (NAIVE_TIMEOUT/1000);
-        long totalTimeRun = 5L; //(NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
+        long totalTimeRun = (NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
         product.setAvailabilityConfidence(product.getAvailabilityConfidence() + 95);
         return (((double)upTime/(double)totalTimeRun) * 80);
     }

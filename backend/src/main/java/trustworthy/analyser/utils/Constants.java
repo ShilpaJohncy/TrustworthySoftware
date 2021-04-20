@@ -17,7 +17,7 @@ public final class Constants {
     public static final String WINCHECKSEC_EXE = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\main\\resources\\winchecksec\\winchecksec.exe";
 
     public static final int NO_OF_TRIES = 5;
-    public static final long NAIVE_TIMEOUT = 1000L;
+    public static final long NAIVE_TIMEOUT = 2000L;
     public static final long LONGER_TIMEOUT = 50000L;
 
     // Weightage for the CVSS severity ratings

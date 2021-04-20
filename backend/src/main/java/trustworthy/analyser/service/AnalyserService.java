@@ -16,6 +16,7 @@ import static trustworthy.analyser.utils.Constants.*;
 @Service
 public class AnalyserService {
 
+    static DecimalFormat df = new DecimalFormat("#.#");
     /**
      * The service that will run all tests to determine overall trustworthiness
      * @param product - The product details passed
@@ -24,19 +25,19 @@ public class AnalyserService {
     public AnalyserResponseObject runTests(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
         if(product.getSecurity() > 0){
-            responseObject.setSecurityScore(runSecurityTests(product));
+            responseObject.setSecurityScore(Double.parseDouble(df.format(runSecurityTests(product))));
         }
         if(product.getSafety() > 0){
-            responseObject.setSafetyScore(runSafetyTests(product));
+            responseObject.setSafetyScore(Double.parseDouble(df.format(runSafetyTests(product))));
         }
         if(product.getResiliency() > 0){
-            responseObject.setResiliencyScore(runResiliencyTests(product));
+            responseObject.setResiliencyScore(Double.parseDouble(df.format(runResiliencyTests(product))));
         }
         if(product.getAvailability() > 0){
-            responseObject.setAvailabilityScore(runAvailabilityTests(product));
+            responseObject.setAvailabilityScore(Double.parseDouble(df.format(runAvailabilityTests(product))));
         }
         if(product.getReliability() > 0){
-            responseObject.setReliabilityScore(runReliabilityTests(product));
+            responseObject.setReliabilityScore(Double.parseDouble(df.format(runReliabilityTests(product))));
 
         }
         calculateVerdict(responseObject, product);
@@ -90,7 +91,6 @@ public class AnalyserService {
         double reliability = (product.getReliabilityConfidence() * product.getReliability()) / 100;
         double availability = (product.getAvailabilityConfidence() * product.getAvailability()) / 100;
         double confidence = security + safety + availability + reliability + resiliency;
-        DecimalFormat df = new DecimalFormat("#.#");
         confidence = Double.parseDouble(df.format(confidence));
         responseObject.setConfidence(confidence);
     }
@@ -102,7 +102,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runSecurityTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setSecurityScore(runSecurityTests(product));
+        responseObject.setSecurityScore(Double.parseDouble(df.format(runSecurityTests(product))));
         return responseObject;
     }
 
@@ -113,7 +113,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runSafetyTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setSafetyScore(runSafetyTests(product));
+        responseObject.setSafetyScore(Double.parseDouble(df.format(runSafetyTests(product))));
         return responseObject;
     }
 
@@ -124,7 +124,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runAvailabilityTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setAvailabilityScore(runAvailabilityTests(product));
+        responseObject.setAvailabilityScore(Double.parseDouble(df.format(runAvailabilityTests(product))));
         return responseObject;
     }
 
@@ -135,7 +135,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runResiliencyTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setResiliencyScore(runResiliencyTests(product));
+        responseObject.setResiliencyScore(Double.parseDouble(df.format(runResiliencyTests(product))));
         return responseObject;
     }
 
@@ -146,7 +146,7 @@ public class AnalyserService {
      */
     public AnalyserResponseObject runReliabilityTest(Product product){
         AnalyserResponseObject responseObject = new AnalyserResponseObject();
-        responseObject.setAvailabilityScore(runReliabilityTests(product));
+        responseObject.setAvailabilityScore(Double.parseDouble(df.format(runReliabilityTests(product))));
         return responseObject;
     }
 }

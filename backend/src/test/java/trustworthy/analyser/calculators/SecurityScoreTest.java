@@ -22,7 +22,7 @@ public class SecurityScoreTest {
 
     @Test
     public void securityTestForAppWithSecurityFeaturesOff(){
-        final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TestApps\\AppFailingAllTheTime.exe";
+        final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\test\\resources\\TestApps\\AppFailingAllTheTime.exe";
         Product testProduct = new Product();
         testProduct.setExecutablePath(failAllTheTime);
         assertEquals(31, runSecurityTests(testProduct), 0);

@@ -6,6 +6,7 @@ import trustworthy.analyser.utils.Product;
 import java.io.IOException;
 
 import static trustworthy.analyser.helpers.winchecksec.Winchecksec.getWinCheckSecScores;
+import static trustworthy.analyser.utils.Constants.NAIVE_TIMEOUT;
 import static trustworthy.analyser.utils.ExecuteApplication.executeApplication;
 import static trustworthy.analyser.utils.Constants.NO_OF_TRIES;
 
@@ -27,7 +28,7 @@ public class ReliabilityScore {
     private static double calculateFailureRate(Product product){
         executeApplication(product);
         int noOfFailures = NO_OF_TRIES - product.getSuccessfulRuns();
-        long totalTimeRun = 5L; // (NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
+        long totalTimeRun = (NAIVE_TIMEOUT/1000) * NO_OF_TRIES;
         double failureRate = (double)(noOfFailures)/(double)totalTimeRun;
         product.setReliabilityConfidence(product.getReliabilityConfidence() + 95);
         return ( (1 - failureRate)* 80);

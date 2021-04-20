@@ -10,8 +10,7 @@ import static trustworthy.analyser.utils.Constants.ZOOM_EXE;
 
 public class SafetyScoreTest {
 
-    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TestApps\\AppFailingAllTheTime.exe";
-
+    final String failAllTheTime = "C:\\Users\\shilp\\Desktop\\Uni\\Project\\TrustworthySoftware\\backend\\src\\test\\resources\\TestApps\\AppFailingAllTheTime.exe";
     @Test
     public void appThatFailsAllTheTimeSafetyTest(){
         Product testProduct = new Product();
